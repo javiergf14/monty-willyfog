@@ -2,17 +2,56 @@ import pymssql
 import daff
 
 def connection(server, user, password, database):
+    """
+    Connection to a Microsoft SQL Server database.
+
+    Parameters
+    ----------
+    server
+        database host.
+    user
+        database user to connect as.
+    password
+         user’s password.
+    database
+        the database to initially connect to.
+
+    Return
+    ------
+    Connection
+        a MSSQL database connection.
+    """
+
     return pymssql.connect(server=server, user=user, password=password, database=database)      
 
 
-def transform_to_template(raw_doc, raw_header, format_array):    
+def transform_to_template(raw_doc, raw_header, format_array):   
+    """
+    Transform a raw document into a default template given a format.
+
+    Parameters
+    ----------
+    raw_doc
+        raw document to transform.
+    raw_header
+        headers of the raw document.
+    format_array
+        instrucctions on how to transform the raw document to.
+
+    Return
+    ------
+    Array
+        the formatted document.
+    """ 
+
+    # Dummy rows at the beginning of the file.
     offset = format_array["Offset"]
     format_array.pop("Offset", None)
     
     formatted_doc = []
     formatted_doc.append(raw_header)
     for cont, raw_row in enumerate(raw_doc):
-        if cont < offset: continue # Dummy rows at the beginning of the file.
+        if cont < offset: continue 
         row = ['']*len(raw_header)
         for key, value in format_array.items():
             row[raw_header.index(key)] = str(raw_row[value-1])       
@@ -21,6 +60,32 @@ def transform_to_template(raw_doc, raw_header, format_array):
    
 
 def files_comparator(current_file, new_file, format_array):
+    """
+    Comparing two tables using the `daff` library.
+
+    The `daff` library is optimized for comparing tables that share a common origin, 
+    in other words multiple versions of the "same" table.
+
+    More info: http://paulfitz.github.io/daff/
+
+    Parameters
+    ----------
+    current_file
+        last version of the table.
+    new_file
+        new version of the table.
+    format_array
+        instrucctions on how the new version has been transformed to.
+
+    Return
+    ------
+    insert
+        new rows to instert.
+    remove
+        old rows to remove.
+    update
+        old rows to update.
+    """
        
     table1 = daff.PythonTableView(current_file)
     table2 = daff.PythonTableView(new_file)   
@@ -61,20 +126,58 @@ def files_comparator(current_file, new_file, format_array):
   
 
 def remove_rows(rows, table_name, cursor):
-    # We do not remove rows, we desactivate them.
+    """
+    Remove rows from the database. Actually, we just desactivate them.
+
+    Parameters
+    ----------
+    rows
+        rows to remove.
+    table_name
+        name of the table where the rows will be removed.
+    cursor
+        connection to the MSSQL database.
+    """
+    
     for elem in rows:
         cursor.execute('UPDATE {} SET Activado=0 WHERE Id={}'.format(table_name, elem))
    
 
-def insert_rows(rows, table_name, raw_header, db_header, format_array, cursor, id_pagador): 
+def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, id_pagador): 
+    """
+    Insert rows to the database. 
+
+    If the row has already existed in the database, we activate it.
+    Else, we insert this new row.
+
+    Parameters
+    ----------
+    rows
+        rows to insert.
+    table_name
+        name of the table where the rows will be inserted.
+    cursor
+        connection to the MSSQL database.
+    raw_header
+        headers of the new document.
+    db_header
+        headers of the database.
+    format_array
+         instrucctions on how the new version has been transformed to.
+    id_pagador
+        id of the pagadora.
+    """
+
     for elem in rows: 
-        # To check if the row does already exist.
+
+        # Constructing a row with the database format in order to check if the row does already exist.
         condition = ''
         for cont, i in enumerate(raw_header):
             if elem[cont]:
                 condition += i+"='"+elem[cont]+"' AND "
         condition += "Activado='0'"
         
+        # Check if the row does exist.
         msg = 'SELECT * FROM {} WHERE {}'.format(table_name, condition)
         cursor.execute(msg)
         resp = cursor.fetchone() 
@@ -82,7 +185,7 @@ def insert_rows(rows, table_name, raw_header, db_header, format_array, cursor, i
         if resp: # If the row exists, activate it.      
             cursor.execute('UPDATE {} SET Activado=1 WHERE Id={}'.format(table_name, resp[0]))
         
-        else: # If not, create the row.
+        else: # If not, create the new row.
             try:
                 db_header.pop(db_header.index("Id")) # Remove the ID field.
             except:
@@ -104,18 +207,33 @@ def insert_rows(rows, table_name, raw_header, db_header, format_array, cursor, i
      
 
 def update_rows(rows, table_name, cursor):
+    """
+    Update rows from the database. 
+
+    Parameters
+    ----------
+    rows
+        rows to update.
+    table_name
+        name of the table where the rows will be updated.
+    cursor
+        connection to the MSSQL database.
+    """
+
     to_update = []
-    for elem in rows:    
+    for elem in rows:  
+
         msg = 'SELECT Id, {} FROM {} WHERE Id={}'.format(elem[1], table_name, "'"+str(elem[0])+"'")
         cursor.execute(msg)
         resp = cursor.fetchone()
         old_value = [resp[0], elem[1], resp[1]]
         new_value = elem
+
+        # In the future, we will ask if we indeed want to change the value.
         #print("Old value:", old_value)
-        #print("New value", new_value)
-        input_var = 1
+        #print("New value", new_value)        
         #input_var = input("Cual de las alternativas quieres introducir? 0 (old value), 1 (new value) o introduce tu propio valor:")
-        
+        input_var = 1
         new_var = []
         if input_var == 0:
             new_var = old_value

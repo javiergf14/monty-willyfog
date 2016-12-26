@@ -69,7 +69,7 @@ def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
     
     # Insert changes in the database.
     montydb.remove_rows(remove, table_name, cursor)
-    montydb.insert_rows(insert, table_name, raw_header, db_header, local_format_array, cursor, int(id_pagador))
+    montydb.insert_rows(insert, table_name, cursor, raw_header, db_header, local_format_array, int(id_pagador))
     to_update = montydb.update_rows(update, table_name, cursor)
     # Commit changes.
     conn.commit()
