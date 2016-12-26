@@ -1,13 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 16 21:10:20 2016
-
-@author: javiergf14@gmail.com
-"""
-import pymssql, daff
+import pymssql
+import daff
 
 def connection(server, user, password, database):
     return pymssql.connect(server=server, user=user, password=password, database=database)      
+
 
 def transform_to_template(raw_doc, raw_header, format_array):    
     offset = format_array["Offset"]
@@ -22,7 +18,8 @@ def transform_to_template(raw_doc, raw_header, format_array):
             row[raw_header.index(key)] = str(raw_row[value-1])       
         formatted_doc.append(row)
     return formatted_doc
-    
+   
+
 def files_comparator(current_file, new_file, format_array):
        
     table1 = daff.PythonTableView(current_file)
@@ -44,7 +41,6 @@ def files_comparator(current_file, new_file, format_array):
     
     data = [x for x in table_diff.getData() if x[0] not in filter_list] 
     
-
     insert = []
     remove = []
     update = []
@@ -62,12 +58,14 @@ def files_comparator(current_file, new_file, format_array):
                     aux = i.split("->")[1]                
                     update.append((elem[1], header[cont+1], aux)) # +1 because of @@ header.
     return insert, remove, update
-    
+  
+
 def remove_rows(rows, table_name, cursor):
     # We do not remove rows, we desactivate them.
     for elem in rows:
         cursor.execute('UPDATE {} SET Activado=0 WHERE Id={}'.format(table_name, elem))
    
+
 def insert_rows(rows, table_name, raw_header, db_header, format_array, cursor, id_pagador): 
     for elem in rows: 
         # To check if the row does already exist.
@@ -104,6 +102,7 @@ def insert_rows(rows, table_name, raw_header, db_header, format_array, cursor, i
             msg = "INSERT INTO {} ({}, DateStamp, CheckCuenta, tipoPagoAgente, Id_Pagador) VALUES ({}, GETDATE(), 'com.bjs.util.checkAccountGeneral', '9', {})".format(table_name, ','.join(db_header), ','.join(row), id_pagador)
             cursor.execute(msg)
      
+
 def update_rows(rows, table_name, cursor):
     to_update = []
     for elem in rows:    

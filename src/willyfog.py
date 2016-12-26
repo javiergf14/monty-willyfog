@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Editor de Spyder
-
-Este es un archivo temporal
-"""
-
-import json, argparse, unidecode
+import json
+import argparse
+import unidecode
 import pandas as pd
 import copy
 import secrets # Script where credentials are stored.
@@ -59,7 +54,6 @@ def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
         unicode_doc.append(unicode_row)    
     raw_doc = unicode_doc
     
-    
     # Convert raw document to template format.  
     formatted_doc = montydb.transform_to_template(raw_doc, raw_header, local_format_array) 
     
@@ -90,9 +84,9 @@ def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
 if __name__ == '__main__':    
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("new_file", help="Fichero nuevo a comparar", default="nepal_new.csv", nargs='?')
+    parser.add_argument("new_file", help="Fichero nuevo a comparar", nargs='?')
     parser.add_argument("id_pagador", help="Pagadora a insertar nuevos puntos de pago", 
-                        type=str, default=1252, nargs='?')
+                        type=str, nargs='?')
     parser.add_argument("flag", help="Argumento para insertar nuevos puntos de pago. 0: todos, 1: insertar, 2: borrar", 
                         type=int, default=0, nargs='?')
     parser.add_argument("debug", help="Debug option", 
