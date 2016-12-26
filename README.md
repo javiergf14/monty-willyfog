@@ -10,5 +10,5 @@ Installation
 -----------
 Dependencies:
 
-Python 3.5.2
-Microsoft SQL Server 2008 R2
+* Python 3.5.2
+* Microsoft SQL Server 2008 R2
