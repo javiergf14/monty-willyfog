@@ -1,8 +1,8 @@
 # monty-willyfog: Unification of Monty data sources to solve the Variety problem.
 
-<center>
+<p align="center">
 <img src="data/images/willyfog_logo.jpg">
-</center>
+</p>
 
 The importation of payment points in [Monty](http://www.montyglobal.es/) has always been a tedious and difficult process of maintenance and control. The fact that each of the correspondents communicates their payment points in different formats and channels caused that, as a first solution, Monty opted to carry out a previous elimination of all these payment points and a later load with the new listing.
 
