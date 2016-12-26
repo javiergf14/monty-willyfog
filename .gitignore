@@ -1,0 +1,5 @@
+cmd/*
+tmp/*
+src/secrets.py
+src/__pycache__
+*pyc
