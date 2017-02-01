@@ -6,78 +6,26 @@ This is a temporary script file.
 """
 import pymssql
 from flask import Flask, flash, redirect, render_template, request, session, abort
-from src import secrets # Script where credentials are stored.
+from src import secrets
+from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas,\
+    select_pagadoras, select_puntospago
 
-# User-defined function section.
-def select_all(cursor, parameter, table):
-    sqlquery = 'SELECT {} FROM {}'.format(parameter, table)
-    cursor.execute(sqlquery) 
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append(row[0])
-        row = cursor.fetchone()
-    return array
-
-def select_where(cursor, parameter, condition, value, table):
-    sqlquery = "SELECT {} FROM {} WHERE {}='{}'".format(parameter, table, condition, value)
-    cursor.execute(sqlquery) 
-    return cursor.fetchone()[0]
-
-
-def select_formas_pago(cursor, codigo_pais):
-    sqlquery = "select distinct fp.id as id, fp.nombre as nombre from tbl_forma_pago fp inner join tbl_sucursal suc on fp.id = suc.tipoPagoAgente inner join tbl_pagador p    on p.id = suc.id_pagador where p.id_pais = {}".format(codigo_pais)
-    cursor.execute(sqlquery) 
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[1]))
-        row = cursor.fetchone()
-    return array
-    
-def select_monedas(cursor, codigo_pais, id_forma_pago):
-    sqlquery = 'select distinct mon.id as idMoneda, mon.nombre as nombreMoneda from tbl_moneda mon inner join tbl_pagador p on mon.id = p.id_moneda inner join tbl_sucursal suc on p.id = suc.id_pagador where p.id_pais = {} AND suc.tipoPagoAgente = {}'.format(codigo_pais, id_forma_pago)
-    cursor.execute(sqlquery) 
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[1]))
-        row = cursor.fetchone()
-    return array
-    
-def select_pagadoras(cursor, codigo_pais, forma_pago, id_monedas, grupos_pagador):
-    sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_pais = {} AND Forma_Pago = '{}' AND Id_Moneda = {} AND Id_GrupoPagador = {}".format(codigo_pais, forma_pago, id_monedas, grupos_pagador)
-    cursor.execute(sqlquery) 
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[0]))
-        row = cursor.fetchone()
-    return array
-    
-def select_puntospago(cursor, id_pagadora):
-    sqlquery = "select * FROM TBL_SUCURSAL WHERE Id_pagador={}".format(id_pagadora)
-    cursor.execute(sqlquery) 
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row))
-        row = cursor.fetchone()
-    return array
     
 # FLASK section.
 app = Flask(__name__)
- 
+# Lucca connection.
+conn = connection(secrets.db_server, secrets.user, secrets.password, secrets.db_name)
+cursor = conn.cursor()
+
+
 @app.route("/")
 def index():
-    return "Flask App!"
- 
+    return "WillyFog Flask App!"
+
+
 @app.route("/hello/Willyfog/", methods=['GET'])
 def hello():
-    # Lucca connection.
-    conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
-                           database=secrets.db_name)
-    cursor = conn.cursor() 
+
 
     grupos_pagador = select_all(cursor, 'Empresa', 'TBL_GRUPOPAGADOR')
     paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
@@ -117,13 +65,11 @@ def saludo2():
    id_forma_pago = select_where(cursor, 'Id', 'Nombre', forma_pago, 'TBL_FORMA_PAGO')
    
    monedas = select_monedas(cursor, codigo_pais, id_forma_pago)
-   
-  
-        
     
    return render_template(
           'test3.html',**locals())
-   
+
+
 @app.route('/hello/Willyfog/step4', methods=['POST', 'GET'])
 def saludo3():
     # Lucca connection.
@@ -145,7 +91,8 @@ def saludo3():
     
    return render_template(
           'test4.html',**locals())
-   
+
+
 @app.route('/hello/Willyfog/step5', methods=['POST', 'GET'])
 def saludo4():
     # Lucca connection.
