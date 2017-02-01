@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="block1">
+<h1>Willyfog - Actualizacion de pagadoras</h1>
+</div>
+
+<script>
+function enviarURL(){
+			var toPais = '{{ codigo_pais }}';
+			
+			
+			var grupoPagador = '{{ id_grupos_pagador}}';
+			var formaPago = document.getElementById("parametroGruposPagador").value		
+			
+			var url = '/hello/Willyfog/step3?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='+grupoPagador;
+			window.location.href=url;
+			
+				
+	}	
+</script>
+
+
+Seleccione la forma de pago:
+<br>
+<form id="formularioFormaPago" name="formularioFormaPago"
+	action="/Localizador/formulario.jsp" method="GET">
+	
+	<select name="listaGruposPagador" id="parametroGruposPagador">
+	</select> 
+</form>
+
+<button onclick="enviarURL();">Envia datos forma de pago</button>
+
+<!-- Script para rellenar el formulario con los grupos pagadores -->
+<script>
+	var i;
+	var array = {{ formas_pago|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroGruposPagador");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+</script>
+
+
+
+
+	
+
+
+{% endblock %}

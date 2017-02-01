@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block body %}
+ 
+<div class="block1">
+<h1>Willyfog - Actualizacion de pagadoras</h1>
+</div>
+
+<script>
+function enviarURL(){
+			var toPais = document.getElementById("parametroPais").value;
+			var pais;
+			
+			var formaPago = document.getElementById("parametroGruposPagador").value;		
+			
+			var url = '/hello/Willyfog/step2?parametroPais='+toPais+'&parametroFormaPago='+formaPago;
+			window.location.href=url;
+			
+				
+	}	
+</script>
+
+
+Seleccione el grupo pagador:
+<br>
+<form id="formularioFormaPago" name="formularioFormaPago"
+	action="/Localizador/formulario.jsp" method="GET">
+	
+	<input type="text" onKeyUp="sel(this.value)"><br> <select
+			name="listaGruposPagador" id="parametroGruposPagador" size="5">
+		</select>
+
+ 
+</form>
+
+<!-- Script para rellenar el formulario con los grupos pagadores -->
+<script>
+	var i;
+	var array = {{ grupos_pagador|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroGruposPagador");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+</script>
+
+<script>
+	function sel(c){
+		c = c.toUpperCase();
+		formu=document.forms['formularioFormaPago'];
+		caracteres=c.length;
+		if(caracteres!=0){
+		for (x=0;x<formu['listaGruposPagador'].options.length;x++){
+			if(formu['listaGruposPagador'].options[x].value.slice(0,caracteres)==c){
+				formu['listaGruposPagador'].selectedIndex=x;
+				formu['listaGruposPagador'].style.visibility="visible";
+				break;
+			}else{
+				formu['listaGruposPagador'].style.visibility="hidden";
+			}
+		}
+		}else{
+			formu['lista'].style.visibility="hidden";
+		}
+	}
+</script>
+
+
+Seleccione el pais:
+<br>
+<form id="formularioPais" name="formularioPais"
+	action="/Localizador/formulario.jsp" method="GET">
+	
+	<select name="listaPaises" id="parametroPais">
+	</select> 
+</form>
+<button onclick="enviarURL();">Envia datos forma de pago</button>
+
+<!-- Script para rellenar el formulario con los paises -->
+<script>
+	var i;
+	var array = {{ paises|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroPais");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+</script>
+
+	
+
+
+{% endblock %}
