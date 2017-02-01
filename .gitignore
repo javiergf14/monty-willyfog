@@ -4,3 +4,4 @@ src/secrets.py
 src/__pycache__
 *pyc
 .idea/
+templates/layout.html
