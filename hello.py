@@ -10,9 +10,9 @@ from src import secrets
 from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas,\
     select_pagadoras, select_puntospago
 
-    
 # FLASK section.
 app = Flask(__name__)
+
 # Lucca connection.
 conn = connection(secrets.db_server, secrets.user, secrets.password, secrets.db_name)
 cursor = conn.cursor()
@@ -23,7 +23,7 @@ def index():
     return "WillyFog Flask App!"
 
 
-@app.route("/hello/Willyfog/", methods=['GET'])
+@app.route("/Willyfog/", methods=['GET'])
 def hello():
 
 
@@ -33,7 +33,7 @@ def hello():
     return render_template(
         'test.html',**locals())
     
-@app.route('/hello/Willyfog/step2', methods=['POST', 'GET'])
+@app.route('/Willyfog/step2', methods=['POST', 'GET'])
 def saludo():
     # Lucca connection.
    conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
@@ -51,7 +51,7 @@ def saludo():
    return render_template(
           'test2.html',**locals())
    
-@app.route('/hello/Willyfog/step3', methods=['POST', 'GET'])
+@app.route('/Willyfog/step3', methods=['POST', 'GET'])
 def saludo2():
     # Lucca connection.
    conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
@@ -70,7 +70,7 @@ def saludo2():
           'test3.html',**locals())
 
 
-@app.route('/hello/Willyfog/step4', methods=['POST', 'GET'])
+@app.route('/Willyfog/step4', methods=['POST', 'GET'])
 def saludo3():
     # Lucca connection.
    conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
@@ -93,7 +93,7 @@ def saludo3():
           'test4.html',**locals())
 
 
-@app.route('/hello/Willyfog/step5', methods=['POST', 'GET'])
+@app.route('/Willyfog/step5', methods=['POST', 'GET'])
 def saludo4():
     # Lucca connection.
 
