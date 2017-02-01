@@ -25,8 +25,6 @@ def index():
 
 @app.route("/Willyfog/", methods=['GET'])
 def hello():
-
-
     grupos_pagador = select_all(cursor, 'Empresa', 'TBL_GRUPOPAGADOR')
     paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
     
@@ -35,11 +33,6 @@ def hello():
     
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
 def saludo():
-    # Lucca connection.
-   conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
-                          database=secrets.db_name)
-   cursor = conn.cursor() 
-
    pais = request.args.get('parametroPais')
    grupos_pagador = request.args.get('parametroFormaPago')
    
@@ -53,11 +46,6 @@ def saludo():
    
 @app.route('/Willyfog/step3', methods=['POST', 'GET'])
 def saludo2():
-    # Lucca connection.
-   conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
-                           database=secrets.db_name)
-   cursor = conn.cursor() 
-
    codigo_pais = request.args.get('parametroPais')
    grupos_pagador = request.args.get('parametroGrupoPagador')
    forma_pago = request.args.get('parametroFormaPago')
@@ -72,22 +60,13 @@ def saludo2():
 
 @app.route('/Willyfog/step4', methods=['POST', 'GET'])
 def saludo3():
-    # Lucca connection.
-   conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
-                           database=secrets.db_name)
-   cursor = conn.cursor() 
-
    codigo_pais = request.args.get('parametroPais')
    grupos_pagador = request.args.get('parametroGrupoPagador')
    forma_pago = request.args.get('parametroFormaPago')
    monedas = request.args.get('parametroMoneda')
-   
    id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
    
-   
    pagadoras = select_pagadoras(cursor, codigo_pais, forma_pago, id_monedas, grupos_pagador)
-   
-        
     
    return render_template(
           'test4.html',**locals())
@@ -95,11 +74,6 @@ def saludo3():
 
 @app.route('/Willyfog/step5', methods=['POST', 'GET'])
 def saludo4():
-    # Lucca connection.
-
-   conn = pymssql.connect(server=secrets.db_server, user=secrets.user, password=secrets.password,
-                           database=secrets.db_name)
-   cursor = conn.cursor() 
    pagadora = request.args.get('parametroPagadoras')
    
    id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadora, 'TBL_PAGADOR')
