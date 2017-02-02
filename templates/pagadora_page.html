@@ -20,7 +20,11 @@ function enviarURL(){
         var fichero = document.getElementById('myFile').value;
         var modo = document.querySelector('input[name="change"]:checked').value;
 
-        var url = '/Willyfog/step5?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='+grupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+pagadora+'&parametroFichero='+fichero+'&parametroModo='+modo;
+        var selectedValues = $('#parametroPagadoras').val();
+
+
+        var url = '/Willyfog/step5?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='
+        +grupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+selectedValues+'&parametroFichero='+fichero+'&parametroModo='+modo;
         window.location.href=url;
 	}	
 
