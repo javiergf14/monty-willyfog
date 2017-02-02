@@ -4,7 +4,6 @@ Spyder Editor
 
 This is a temporary script file.
 """
-import pymssql
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from src import secrets
 from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas, \
@@ -28,7 +27,7 @@ def pagador_page():
     grupos_pagador = select_all(cursor, 'Empresa', 'TBL_GRUPOPAGADOR')
     paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
 
-    return render_template('test.html', **locals())
+    return render_template('pagador_page.html', **locals())
 
 
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
@@ -40,7 +39,7 @@ def forma_pago_page():
 
     codigo_pais = select_where(cursor, 'Id', 'Nombre', pais, 'TBL_PAIS')
     formas_pago = select_formas_pago(cursor, codigo_pais)
-    return render_template('test2.html', **locals())
+    return render_template('forma_pago_page.html', **locals())
 
 
 @app.route('/Willyfog/step3', methods=['POST', 'GET'])
@@ -53,7 +52,7 @@ def moneda_page():
 
     monedas = select_monedas(cursor, codigo_pais, id_forma_pago)
 
-    return render_template('test3.html', **locals())
+    return render_template('moneda_page.html', **locals())
 
 
 @app.route('/Willyfog/step4', methods=['POST', 'GET'])
@@ -66,7 +65,7 @@ def pagadora_page():
 
     pagadoras = select_pagadoras(cursor, codigo_pais, forma_pago, id_monedas, grupos_pagador)
 
-    return render_template('test4.html', **locals())
+    return render_template('pagadora_page.html', **locals())
 
 
 @app.route('/Willyfog/step5', methods=['POST', 'GET'])
@@ -81,9 +80,7 @@ def results_page():
     print(id_pagadora)
 
     # insert, remove, update = temp.main(new_file, 'format.txt', id_pagadora, modo, 0)
-
-
-    return render_template('test5.html', **locals())
+    return render_template('results_page.html', **locals())
 
 
 if __name__ == "__main__":

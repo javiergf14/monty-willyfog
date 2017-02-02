@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<div class="block1">
+    <h1>Willyfog - Actualizacion de pagadoras</h1>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script>
+function enviarURL(){
+
+		var toPais = '{{ codigo_pais }}';
+        var grupoPagador = '{{ grupos_pagador}}';
+        var formaPago = '{{ forma_pago }}';
+        var moneda = '{{ id_monedas }}';
+        var pagadora = document.getElementById('parametroPagadoras').value;
+        var fichero = document.getElementById('myFile').value;
+        var modo = document.querySelector('input[name="change"]:checked').value;
+
+        var url = '/Willyfog/step5?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='+grupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+pagadora+'&parametroFichero='+fichero+'&parametroModo='+modo;
+        window.location.href=url;
+	}	
+
+</script>
+
+
+Seleccione la pagadora:
+<br>
+<form id="formularioPagadoras" name="formularioPagadoras"
+      action="/Localizador/formulario.jsp" method="GET">
+
+    <select name="listaPagadoras" id="parametroPagadoras">
+    </select>
+</form>
+
+Formato de fichero:
+<br>
+<input type="radio" name="transporte" value="1">Excel <input type="radio" name="transporte" value="2">XML
+<br>
+<br>
+Tipo de actualizacion:
+<br>
+<div id="radios" name="radios">
+    <input type="radio" name="change" value="0">Fichero completo <input type="radio" name="change" value="1">Insercion
+    <input type="radio" name="change" value="2">Borrado <input type="radio" name="change" value="3"> Modificacion
+</div>
+<br>
+<br>
+
+
+<input type="file" id="myFile">
+<br>
+
+<br>
+<button onclick="enviarURL();">Subir nuevo fichero (en pruebas)</button>
+
+
+<!-- Script para rellenar el formulario con los grupos pagadores -->
+<script>
+	var i;
+	var array = {{ pagadoras|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroPagadoras");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+
+</script>
+
+
+{% endblock %}

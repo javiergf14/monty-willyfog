@@ -1,35 +1,31 @@
 {% extends "layout.html" %}
 {% block body %}
- 
+
 <div class="block1">
-<h1>Willyfog - Actualizacion de pagadoras</h1>
+    <h1>Willyfog - Actualizacion de pagadoras</h1>
 </div>
 
 <script>
 function enviarURL(){
 			var toPais = document.getElementById("parametroPais").value;
-			var pais;
-			
-			var formaPago = document.getElementById("parametroGruposPagador").value;		
-			
+			var formaPago = document.getElementById("parametroGruposPagador").value;
 			var url = '/Willyfog/step2?parametroPais='+toPais+'&parametroFormaPago='+formaPago;
 			window.location.href=url;
-			
-				
 	}	
+
 </script>
 
 
 Seleccione el grupo pagador:
 <br>
 <form id="formularioFormaPago" name="formularioFormaPago"
-	action="/Localizador/formulario.jsp" method="GET">
-	
-	<input type="text" onKeyUp="sel(this.value)"><br> <select
-			name="listaGruposPagador" id="parametroGruposPagador" size="5">
-		</select>
+      action="/Localizador/formulario.jsp" method="GET">
 
- 
+    <input type="text" onKeyUp="sel(this.value)"><br> <select
+        name="listaGruposPagador" id="parametroGruposPagador" size="5">
+</select>
+
+
 </form>
 
 <!-- Script para rellenar el formulario con los grupos pagadores -->
@@ -42,6 +38,7 @@ Seleccione el grupo pagador:
     		option.text = array[i];
     		x.add(option);
    	}
+
 </script>
 
 <script>
@@ -63,16 +60,17 @@ Seleccione el grupo pagador:
 			formu['lista'].style.visibility="hidden";
 		}
 	}
+
 </script>
 
 
 Seleccione el pais:
 <br>
 <form id="formularioPais" name="formularioPais"
-	action="/Localizador/formulario.jsp" method="GET">
-	
-	<select name="listaPaises" id="parametroPais">
-	</select> 
+      action="/Localizador/formulario.jsp" method="GET">
+
+    <select name="listaPaises" id="parametroPais">
+    </select>
 </form>
 <button onclick="enviarURL();">Envia datos forma de pago</button>
 
@@ -86,9 +84,8 @@ Seleccione el pais:
     		option.text = array[i];
     		x.add(option);
    	}
-</script>
 
-	
+</script>
 
 
 {% endblock %}
