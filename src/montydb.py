@@ -182,8 +182,9 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
         msg = 'SELECT * FROM {} WHERE {}'.format(table_name, condition)
         try:
             cursor.execute(msg)
-        except:
+        except Exception as e:
             print(msg)
+            print(e)
         resp = cursor.fetchone()
 
         
