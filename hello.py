@@ -71,7 +71,7 @@ def pagadora_page():
 @app.route('/Willyfog/step5', methods=['POST', 'GET'])
 def results_page():
     pagadoras = request.args.get('parametroPagadoras')
-    id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadora, 'TBL_PAGADOR')
+    id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadoras, 'TBL_PAGADOR')
     print(id_pagadora)
     #new_file = request.args.get('parametroFichero')
     #modo = request.args.get('parametroModo')
