@@ -180,8 +180,12 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
         
         # Check if the row does exist.
         msg = 'SELECT * FROM {} WHERE {}'.format(table_name, condition)
-        cursor.execute(msg)
-        resp = cursor.fetchone() 
+        try:
+            cursor.execute(msg)
+        except:
+            print(msg)
+        resp = cursor.fetchone()
+
         
         if resp: # If the row exists, activate it.      
             cursor.execute('UPDATE {} SET Activado=1 WHERE Id={}'.format(table_name, resp[0]))
