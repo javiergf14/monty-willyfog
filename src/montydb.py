@@ -174,6 +174,8 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
         condition = ''
         for cont, i in enumerate(raw_header):
             if elem[cont]:
+                # Replace single quotes to double quotes (if not, error when inserting)
+                elem[cont] = elem[cont].replace("'", "''")
                 condition += i+"='"+elem[cont].replace("'", "''")+"' AND "
         condition += "Activado='0'"
         
