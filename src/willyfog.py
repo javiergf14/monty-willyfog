@@ -50,8 +50,9 @@ def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
     for row in raw_doc:
         unicode_row = []
         for elem in row:
-            # Replace ´ character to ''
-            unicode_row.append(unidecode.unidecode(elem.replace("´", "'")))
+            # Convert everything to string and replace ´ character to ''.
+            s = str(elem).replace("´", "'")
+            unicode_row.append(unidecode.unidecode(s))
         unicode_doc.append(unicode_row)    
     raw_doc = unicode_doc
     
