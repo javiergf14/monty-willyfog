@@ -72,7 +72,6 @@ def pagadora_page():
 def results_page():
     pagadoras = request.args.get('parametroPagadoras')
     id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadoras, 'TBL_PAGADOR')
-    print(id_pagadora)
     #new_file = request.args.get('parametroFichero')
     #modo = request.args.get('parametroModo')
     # puntos_pago = select_puntospago(cursor, id_pagadora)
