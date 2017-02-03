@@ -169,13 +169,11 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
         id of the pagadora.
     """
 
-    for elem in rows: 
-
+    for elem in rows:
         # Constructing a row with the database format in order to check if the row does already exist.
         condition = ''
         for cont, i in enumerate(raw_header):
             if elem[cont]:
-                # Replace single quotes by double quotes (if not, it fails when insertion).
                 condition += i+"='"+elem[cont].replace("'", "''")+"' AND "
         condition += "Activado='0'"
         

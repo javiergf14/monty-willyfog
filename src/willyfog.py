@@ -49,8 +49,9 @@ def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
     unicode_doc = []
     for row in raw_doc:
         unicode_row = []
-        for elem in row:        
-            unicode_row.append(unidecode.unidecode(elem))            
+        for elem in row:
+            # Replace single quotes by double quotes (if not, it fails when insertion).
+            unicode_row.append(unidecode.unidecode(elem.replace("'", "''")))
         unicode_doc.append(unicode_row)    
     raw_doc = unicode_doc
     
