@@ -27,7 +27,7 @@ def grupo_pagador_page():
     grupos_pagador = select_all(cursor, 'Empresa', 'TBL_GRUPOPAGADOR')
     paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
 
-    return render_template('grupo_pagador_page.html', **locals())
+    return render_template('1grupo_pagador_page.html', **locals())
 
 
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
@@ -39,7 +39,7 @@ def forma_pago_page():
 
     codigo_pais = select_where(cursor, 'Id', 'Nombre', pais, 'TBL_PAIS')
     formas_pago = select_formas_pago(cursor, codigo_pais)
-    return render_template('forma_pago_page.html', **locals())
+    return render_template('2forma_pago_page.html', **locals())
 
 
 @app.route('/Willyfog/step3', methods=['POST', 'GET'])

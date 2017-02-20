@@ -6,7 +6,13 @@
 </div>
 
 <script>
-function enviarURL(){
+function sendYesURL(){
+			var grupoPagador = document.getElementById("parametroGruposPagador").value;
+			var url = '/Willyfog/step2?parametroGrupoPagador='+grupoPagador;
+			window.location.href=url;
+}
+
+function sendNoURL(){
 			var grupoPagador = document.getElementById("parametroGruposPagador").value;
 			var url = '/Willyfog/step2?parametroGrupoPagador='+grupoPagador;
 			window.location.href=url;
@@ -62,12 +68,21 @@ Seleccione el grupo pagador:
 </script>
 
 
-¿Quiere introducir las pagadoras?:
+¿Quiere introducir las pagadoras?
 <br>
 
-<button onclick="enviarURL();">Sí</button> <button onclick="enviarURL();">No</button>
+<button onclick="sendYesURL();">Sí</button> <button onclick="sendNoURL();">No</button>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+jQuery(document).ready(function(){
+        jQuery('#hideshow').on('click', function(event) {
+             jQuery('#content').toggle('show');
+        });
+    });
+
+<div id='content'>Hello World</div>
+<input type='button' id='hideshow' value='hide/show'>
 
 
 {% endblock %}
