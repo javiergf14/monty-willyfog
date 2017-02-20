@@ -13,7 +13,7 @@
 function enviarURL(){
 
 		var toPais = '{{ codigo_pais }}';
-        var grupoPagador = '{{ grupos_pagador}}';
+        var idGrupoPagador = '{{ id_grupos_pagador}}';
         var moneda = '{{ id_monedas }}';
         var pagadora = document.getElementById('parametroPagadoras').value;
 
@@ -21,7 +21,7 @@ function enviarURL(){
 
 
         var url = '/Willyfog/step5?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='
-        +grupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+selectedValues+'&parametroFichero='+fichero+'&parametroModo='+modo;
+        +idGrupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+selectedValues+'&parametroFichero='+fichero+'&parametroModo='+modo;
         window.location.href=url;
 	}	
 
