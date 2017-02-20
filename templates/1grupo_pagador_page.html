@@ -23,6 +23,12 @@ function sendYesPagadoraURL(){
 			var url = '/Willyfog/step12?parametroGrupoPagador='+grupoPagador;
 			window.location.href=url;
 }
+
+function sendNoPagadoraURL(){
+			var grupoPagador = document.getElementById("parametroGruposPagador").value;
+			var url = '/Willyfog/step14?parametroGrupoPagador='+grupoPagador;
+			window.location.href=url;
+}
 </script>
 
 
