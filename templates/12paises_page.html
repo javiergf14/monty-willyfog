@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="block1">
+    <h1>Willyfog - Actualizacion de pagadoras</h1>
+</div>
+
+
+<script>
+function enviarURL(){
+			var toPais = '{{ codigo_pais }}';
+			var grupoPagador = '{{ grupos_pagador}}';
+			var formaPago = '{{ forma_pago }}';
+			var moneda = document.getElementById("parametroMoneda").value
+			
+			var url = '/Willyfog/step4?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='+grupoPagador+'&parametroMoneda='+moneda;
+			window.location.href=url;
+	}	
+
+</script>
+
+Seleccione el pais:
+<br>
+<form id="formularioPais" name="formularioPais"
+      action="/Localizador/formulario.jsp" method="GET">
+
+    <select name="listaPaises" id="parametroPais">
+    </select>
+</form>
+<button onclick="enviarURL();">Envia datos forma de pago</button>
+
+<!-- Script para rellenar el formulario con los paises -->
+<script>
+	var i;
+	var array = {{ paises|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroPais");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+</script>
+
+
+{% endblock %}

@@ -25,9 +25,16 @@ def index():
 @app.route("/Willyfog/", methods=['GET'])
 def grupo_pagador_page():
     grupos_pagador = select_all(cursor, 'Empresa', 'TBL_GRUPOPAGADOR')
-    paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
+
 
     return render_template('1grupo_pagador_page.html', **locals())
+
+
+@app.route('/Willyfog/step12', methods=['POST', 'GET'])
+def forma_pago_page():
+    grupos_pagador = request.args.get('parametroGrupoPagador')
+    paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
+    return render_template('12paises_page.html', **locals())
 
 
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
