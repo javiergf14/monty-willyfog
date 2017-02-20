@@ -348,7 +348,9 @@ def select_pagadoras3(cursor, grupos_pagador):
     return array
 
 def select_pagadoras4(cursor, grupos_pagador):
-    sqlquery = "select Id_Pais, Forma_Pago, Id_Moneda FROM TBL_PAGADOR WHERE Id_GrupoPagador = {}".format(grupos_pagador)
+    sqlquery = "select pais.Nombre, Forma_Pago, Id_Moneda FROM TBL_PAGADOR pag inner join ' \
+               'tbl_pais pais on pais.id = pag.Id_Pais inner join tbl_moneda mon on mon.id = pag.Id_Moneda" \
+               "WHERE pag.Id_GrupoPagador = {}".format(grupos_pagador)
     cursor.execute(sqlquery)
     array = []
     row = cursor.fetchone()
