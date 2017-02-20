@@ -7,7 +7,7 @@ This is a temporary script file.
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from src import secrets
 from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas, \
-    select_pagadoras, select_puntospago, select_monedas2, select_pagadoras2
+    select_pagadoras, select_puntospago, select_monedas2, select_pagadoras2, select_pagadoras3
 
 # FLASK section.
 app = Flask(__name__)
@@ -54,9 +54,12 @@ def pagadora_page2():
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
 
     monedas = request.args.get('parametroMoneda')
-    id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
 
-    pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
+    if monedas:
+        id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
+        pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
+    else:
+        pagadoras = select_pagadoras3(cursor, id_grupos_pagador)
 
 
 
