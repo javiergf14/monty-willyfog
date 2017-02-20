@@ -75,14 +75,13 @@ Seleccione el grupo pagador:
 
 
 <div id='content'>Hello World</div>
-<input type='button' id='hideshow' value='hide/show'>
+<input type='button' id='button' value='hide/show'>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-jQuery(document).ready(function(){
-        jQuery('#hideshow').on('click', function(event) {
-             jQuery('#content').toggle('show');
-        });
-    });
+<script>
+$("#button").click(function() {
+    // assumes element with id='button'
+    $("#newpost").toggle();
+});
 </script>
 
 {% endblock %}
