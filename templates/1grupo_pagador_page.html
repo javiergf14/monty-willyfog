@@ -71,15 +71,15 @@ Seleccione el grupo pagador:
 ¿Quiere introducir las pagadoras?
 <br>
 
-<input type="button" value="btn" onclick="toggle();">Sí</button> <button onclick="sendNoURL();">No</button>
+<input type="button" value="Sí" onclick="toggle();"></button> <button onclick="sendNoURL();">No</button>
 
 <script>
   var toggle = function() {
   var mydiv = document.getElementById('newpost');
   if (mydiv.style.display === 'block' || mydiv.style.display === '')
-    mydiv.style.display = 'none';
+    mydiv.style.display = 'block';
   else
-    mydiv.style.display = 'block'
+    mydiv.style.display = 'none'
   }
 </script>
 
@@ -87,6 +87,7 @@ Seleccione el grupo pagador:
 
 <div id="newpost">
     ¿Quiere usar los filtros de ayuda para buscar las pagadoras?
+    <br>
     <button onclick="sendNoURL();">Sí</button> <button onclick="sendNoURL();">No</button>
 </div>
 {% endblock %}
