@@ -74,14 +74,16 @@ Seleccione el grupo pagador:
 <button onclick="sendYesURL();">Sí</button> <button onclick="sendNoURL();">No</button>
 
 
-<input type='button' id='button' value='hide/show'>
-<div id='newpost'>Probando texto</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-$("#button").click(function() {
-    // assumes element with id='button'
-    $("#newpost").toggle();
-});
+<script>
+  var toggle = function() {
+  var mydiv = document.getElementById('newpost');
+  if (mydiv.style.display === 'block' || mydiv.style.display === '')
+    mydiv.style.display = 'none';
+  else
+    mydiv.style.display = 'block'
+  }
 </script>
 
+<div id="newpost">asdf</div>
+<input type="button" value="btn" onclick="toggle();">
 {% endblock %}
