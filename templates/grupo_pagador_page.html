@@ -7,12 +7,10 @@
 
 <script>
 function enviarURL(){
-			var toPais = document.getElementById("parametroPais").value;
-			var formaPago = document.getElementById("parametroGruposPagador").value;
-			var url = '/Willyfog/step2?parametroPais='+toPais+'&parametroFormaPago='+formaPago;
+			var grupoPagador = document.getElementById("parametroGruposPagador").value;
+			var url = '/Willyfog/step2?parametroGrupoPagador='+grupoPagador;
 			window.location.href=url;
-	}	
-
+}
 </script>
 
 
@@ -64,28 +62,12 @@ Seleccione el grupo pagador:
 </script>
 
 
-Seleccione el pais:
+¿Quiere introducir las pagadoras?:
 <br>
-<form id="formularioPais" name="formularioPais"
-      action="/Localizador/formulario.jsp" method="GET">
 
-    <select name="listaPaises" id="parametroPais">
-    </select>
-</form>
-<button onclick="enviarURL();">Envia datos forma de pago</button>
+<button onclick="enviarURL();">Sí</button> <button onclick="enviarURL();">No</button>
 
-<!-- Script para rellenar el formulario con los paises -->
-<script>
-	var i;
-	var array = {{ paises|tojson }};
-	for (i = 0; i < array.length; i++) {
-	    	var x = document.getElementById("parametroPais");
-    		var option = document.createElement("option");
-    		option.text = array[i];
-    		x.add(option);
-   	}
 
-</script>
 
 
 {% endblock %}

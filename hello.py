@@ -33,7 +33,7 @@ def grupo_pagador_page():
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
 def forma_pago_page():
     pais = request.args.get('parametroPais')
-    grupos_pagador = request.args.get('parametroFormaPago')
+    grupos_pagador = request.args.get('parametroGrupoPagador')
 
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
 
