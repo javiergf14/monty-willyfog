@@ -73,13 +73,13 @@ Seleccione el grupo pagador:
 
 <button onclick="sendYesURL();">Sí</button> <button onclick="sendNoURL();">No</button>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
 jQuery(document).ready(function(){
         jQuery('#hideshow').on('click', function(event) {
              jQuery('#content').toggle('show');
         });
     });
+</script>
 
 <div id='content'>Hello World</div>
 <input type='button' id='hideshow' value='hide/show'>
