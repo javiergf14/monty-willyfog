@@ -48,7 +48,7 @@ def moneda2_page():
 
 
 @app.route('/Willyfog/step14', methods=['POST', 'GET'])
-def pagadora_page():
+def pagadora_page2():
     codigo_pais = request.args.get('parametroPais')
     grupos_pagador = request.args.get('parametroGrupoPagador')
     monedas = request.args.get('parametroMoneda')
