@@ -301,6 +301,19 @@ def select_monedas(cursor, codigo_pais, id_forma_pago):
     return array
 
 
+def select_monedas2(cursor, codigo_pais):
+    sqlquery = 'select distinct mon.id as idMoneda, mon.nombre as nombreMoneda from tbl_moneda mon inner join ' \
+               'tbl_pagador p on mon.id = p.id_moneda where ' \
+               'p.id_pais = {}'.format(codigo_pais)
+    cursor.execute(sqlquery)
+    array = []
+    row = cursor.fetchone()
+    while row:
+        array.append((row[1]))
+        row = cursor.fetchone()
+    return array
+
+
 def select_pagadoras(cursor, codigo_pais, forma_pago, id_monedas, grupos_pagador):
     sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_pais = {} AND Forma_Pago = '{}' AND Id_Moneda = {} " \
                "AND Id_GrupoPagador = {}".format(codigo_pais, forma_pago, id_monedas, grupos_pagador)
