@@ -347,6 +347,16 @@ def select_pagadoras3(cursor, grupos_pagador):
         row = cursor.fetchone()
     return array
 
+def select_pagadoras4(cursor, grupos_pagador):
+    sqlquery = "select Id_Pais, Forma_Pago, Id_Moneda FROM TBL_PAGADOR WHERE Id_GrupoPagador = {}".format(grupos_pagador)
+    cursor.execute(sqlquery)
+    array = []
+    row = cursor.fetchone()
+    while row:
+        array.append((row[0], row[1], row[2]))
+        row = cursor.fetchone()
+    return array
+
 def select_puntospago(cursor, id_pagadora):
     sqlquery = "select * FROM TBL_SUCURSAL WHERE Id_pagador={}".format(id_pagadora)
     cursor.execute(sqlquery)

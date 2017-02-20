@@ -8,24 +8,30 @@
 <script>
 
 
-function sendNoURL(){
-			var grupoPagador = document.getElementById("parametroGruposPagador").value;
-			var url = '/Willyfog/step2?parametroGrupoPagador='+grupoPagador;
-			window.location.href=url;
-}
-
-function sendYesPagadoraURL(){
+function sendNoPagadoraURL(){
 			var grupoPagador = document.getElementById("parametroGruposPagador").value;
 			var fichero = document.getElementById('myFile').value;
             var modo = document.querySelector('input[name="change"]:checked').value;
 
-			var url = '/Willyfog/step12?parametroFichero='+fichero+'&parametroModo'+modo+'&parametroGrupoPagador='+grupoPagador;
+			var url = '/Willyfog/step12?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador;
 			window.location.href=url;
 }
 
-function sendNoPagadoraURL(){
+function sendYesFilterURL(){
 			var grupoPagador = document.getElementById("parametroGruposPagador").value;
-			var url = '/Willyfog/step14?parametroGrupoPagador='+grupoPagador;
+			var fichero = document.getElementById('myFile').value;
+            var modo = document.querySelector('input[name="change"]:checked').value;
+
+			var url = '/Willyfog/step12?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador;
+			window.location.href=url;
+}
+
+function sendNoFilterURL(){
+			var grupoPagador = document.getElementById("parametroGruposPagador").value;
+			var fichero = document.getElementById('myFile').value;
+            var modo = document.querySelector('input[name="change"]:checked').value;
+
+			var url = '/Willyfog/step14?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador;
 			window.location.href=url;
 }
 </script>
@@ -94,14 +100,14 @@ Tipo de actualizacion:
 ¿Quiere introducir las pagadoras?
 <br>
 
-<input type="button" value="Sí" onclick="toggle();"></button> <button onclick="sendNoURL();">No</button>
+<input type="button" value="Sí" onclick="toggle();"></button> <button onclick="sendNoPagadoraURL();">No</button>
 
 <br>
 
 <div id="help_filter_div" style="display:none">
     ¿Quiere usar los filtros de ayuda para buscar las pagadoras?
     <br>
-    <button onclick="sendYesPagadoraURL();">Sí</button> <button onclick="sendNoPagadoraURL();">No</button>
+    <button onclick="sendYesFilterURL();">Sí</button> <button onclick="sendNoFilterURL();">No</button>
 </div>
 
 <script>
