@@ -71,8 +71,7 @@ Seleccione el grupo pagador:
 ¿Quiere introducir las pagadoras?
 <br>
 
-<button onclick="sendYesURL();">Sí</button> <button onclick="sendNoURL();">No</button>
-
+<input type="button" value="btn" onclick="toggle();">Sí</button> <button onclick="sendNoURL();">No</button>
 
 <script>
   var toggle = function() {
@@ -84,6 +83,10 @@ Seleccione el grupo pagador:
   }
 </script>
 
-<div id="newpost">asdf</div>
-<input type="button" value="btn" onclick="toggle();">
+<br>
+
+<div id="newpost">
+    ¿Quiere usar los filtros de ayuda para buscar las pagadoras?
+    <button onclick="sendNoURL();">Sí</button> <button onclick="sendNoURL();">No</button>
+</div>
 {% endblock %}
