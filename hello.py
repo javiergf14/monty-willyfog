@@ -56,11 +56,9 @@ def pagadora_page2():
     monedas = request.args.get('parametroMoneda')
     id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
 
-    pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, grupos_pagador)
+    pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
 
-    sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_pais = {} AND Id_Moneda = {} " \
-               "AND Id_GrupoPagador = {}".format(codigo_pais, id_monedas, grupos_pagador)
-    print(sqlquery)
+
 
     return render_template('14pagadora_page.html', **locals())
 
