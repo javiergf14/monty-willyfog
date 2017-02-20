@@ -8,12 +8,10 @@
 
 <script>
 function enviarURL(){
-			var toPais = '{{ codigo_pais }}';
 			var grupoPagador = '{{ grupos_pagador}}';
-			var formaPago = '{{ forma_pago }}';
-			var moneda = document.getElementById("parametroMoneda").value
+			var pais = document.getElementById("parametroPais").value
 			
-			var url = '/Willyfog/step4?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='+grupoPagador+'&parametroMoneda='+moneda;
+			var url = '/Willyfog/step13?parametroGrupoPagador='+grupoPagador+&parametroPais='+pais;
 			window.location.href=url;
 	}	
 
@@ -27,7 +25,7 @@ Seleccione el pais:
     <select name="listaPaises" id="parametroPais">
     </select>
 </form>
-<button onclick="enviarURL();">Envia datos forma de pago</button>
+<button onclick="enviarURL();">Envia datos país</button>
 
 <!-- Script para rellenar el formulario con los paises -->
 <script>
