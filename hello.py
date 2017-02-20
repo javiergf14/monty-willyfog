@@ -79,6 +79,8 @@ def pagadora_page22():
         formas_pago.add(p[1])
         monedas.add(p[2])
 
+    paises = list(paises)
+    formas_pago = list(formas_pago)
     monedas = list(monedas)
     return render_template('2pagadora_page2.html', **locals())
 

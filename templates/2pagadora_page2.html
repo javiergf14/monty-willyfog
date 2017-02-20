@@ -20,13 +20,23 @@ function enviarURL(){
 
 Seleccione la pagadora (selecciona multiples pagadoras con CTRL + click):
 <br>
-<form id="formularioPagadoras" name="formularioPagadoras"
-      action="/Localizador/formulario.jsp" method="GET">
+<form id="formularioPaises" name="formularioPaises">
 
-    <select name="listaPagadoras" id="parametroPagadoras" multiple>
+    <select name="listaPaises" id="parametroPaises" multiple>
     </select>
 </form>
 
+<form id="formularioFormaPago" name="formularioFormaPago">
+
+    <select name="listaFormaPago" id="parametroFormaPago" multiple>
+    </select>
+</form>
+
+<form id="formularioMonedas" name="formularioMonedas">
+
+    <select name="listaMonedas" id="parametroMonedas" multiple>
+    </select>
+</form>
 
 <br>
 <button onclick="enviarURL();">Envia datos pagadoras</button>
@@ -35,9 +45,25 @@ Seleccione la pagadora (selecciona multiples pagadoras con CTRL + click):
 <!-- Script para rellenar el formulario con los grupos pagadores -->
 <script>
 	var i;
+	var array = {{ paises|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroPaises");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+
+   	var array = {{ formas_pago|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroFormaPago");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+
 	var array = {{ monedas|tojson }};
 	for (i = 0; i < array.length; i++) {
-	    	var x = document.getElementById("parametroPagadoras");
+	    	var x = document.getElementById("parametroMonedas");
     		var option = document.createElement("option");
     		option.text = array[i];
     		x.add(option);
