@@ -7,7 +7,7 @@ This is a temporary script file.
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from src import secrets
 from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas, \
-    select_pagadoras, select_puntospago, select_monedas2
+    select_pagadoras, select_puntospago, select_monedas2, select_pagadoras2
 
 # FLASK section.
 app = Flask(__name__)
@@ -46,6 +46,17 @@ def moneda2_page():
     monedas = select_monedas2(cursor, codigo_pais)
     return render_template('13moneda_page.html', **locals())
 
+
+@app.route('/Willyfog/step14', methods=['POST', 'GET'])
+def pagadora_page():
+    codigo_pais = request.args.get('parametroPais')
+    grupos_pagador = request.args.get('parametroGrupoPagador')
+    monedas = request.args.get('parametroMoneda')
+    id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
+
+    pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, grupos_pagador)
+
+    return render_template('14pagadora_page.html', **locals())
 
 
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
