@@ -17,26 +17,28 @@ function enviarURL(){
 
 </script>
 
-Seleccione el pais:
+Seleccione la moneda:
 <br>
-<form id="formularioPais" name="formularioPais"
+<form id="formularioMoneda" name="formularioMoneda"
       action="/Localizador/formulario.jsp" method="GET">
 
-    <select name="listaPaises" id="parametroPais">
+    <select name="listaMoneda" id="parametroMoneda">
     </select>
 </form>
-<button onclick="enviarURL();">Envia datos país</button>
 
-<!-- Script para rellenar el formulario con los paises -->
+<button onclick="enviarURL();">Envia datos forma de pago</button>
+
+<!-- Script para rellenar el formulario con los grupos pagadores -->
 <script>
 	var i;
-	var array = {{ paises|tojson }};
+	var array = {{ monedas|tojson }};
 	for (i = 0; i < array.length; i++) {
-	    	var x = document.getElementById("parametroPais");
+	    	var x = document.getElementById("parametroMoneda");
     		var option = document.createElement("option");
     		option.text = array[i];
     		x.add(option);
    	}
+
 </script>
 
 
