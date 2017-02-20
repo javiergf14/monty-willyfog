@@ -66,7 +66,7 @@ def pagadora_page2():
     return render_template('14pagadora_page.html', **locals())
 
 @app.route('/Willyfog/step2new', methods=['POST', 'GET'])
-def pagadora_page2():
+def pagadora_page22():
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
     pagadoras_info = select_pagadoras4(cursor, id_grupos_pagador)
