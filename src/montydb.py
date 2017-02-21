@@ -288,9 +288,18 @@ def select_monedas(cursor, codigo_pais):
     return array
 
 
-def select_pagadoras_by_moneda(cursor, codigo_pais, id_monedas, grupos_pagador):
-    sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_pais = {} AND Id_Moneda = {} " \
-               "AND Id_GrupoPagador = {}".format(codigo_pais, id_monedas, grupos_pagador)
+def select_pagadora(cursor, codigo_pais=None, id_monedas=None, grupos_pagador=None):
+    first_and = False
+    sqlquery = "select Empresa FROM TBL_PAGADOR WHERE "
+    if(codigo_pais):
+        sqlquery += "Id_pais ="+codigo_pais
+        first_and = True
+    if(id_monedas):
+        sqlquery += first_and * "AND " + "Id_Moneda =" + id_monedas
+        first_and = True
+    if(grupos_pagador):
+        sqlquery += first_and * "AND " + "Id_GrupoPagador =" + grupos_pagador
+
     cursor.execute(sqlquery)
     array = []
     row = cursor.fetchone()
@@ -299,16 +308,6 @@ def select_pagadoras_by_moneda(cursor, codigo_pais, id_monedas, grupos_pagador):
         row = cursor.fetchone()
     return array
 
-
-def select_pagadoras_name(cursor, grupos_pagador):
-    sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_GrupoPagador = {}".format(grupos_pagador)
-    cursor.execute(sqlquery)
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[0]))
-        row = cursor.fetchone()
-    return array
 
 def select_pagadoras_complete(cursor, grupos_pagador):
     sqlquery = "select pais.Nombre, pag.Forma_Pago, mon.Nombre FROM TBL_PAGADOR pag " \
