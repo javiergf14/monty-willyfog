@@ -5,7 +5,13 @@ import pandas as pd
 import copy
 from src import secrets, montydb
 
-def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
+
+def main(new_csv, id_pagador, flag, debug, pagadora=None):
+    # Loading the format file
+    with open("../data/formats/format_" + str(id_pagador) + ".txt", "r") as f:
+        format_json = f.read()
+    format_array = json.loads(format_json)
+
     # Database parameters
     table_name = 'TBL_SUCURSAL' 
     
@@ -94,14 +100,11 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     
-    # Loading the format file
-    with open("../data/formats/format_"+str(args.id_pagador)+".txt", "r") as f:
-            format_json = f.read()
-    format_array = json.loads(format_json)
+
     
     # If multiple pagadoras inside the file (e.g. More)
-    if "Pagadoras" in format_array:
-        for pagadora, id_pagador in format_array["Pagadoras"].items():
-            main(args.new_file, id_pagador, format_array, args.flag, args.debug, pagadora)
-    else:
-        main(args.new_file, args.id_pagador, format_array, args.flag, args.debug)
+    #if "Pagadoras" in format_array:
+    #    for pagadora, id_pagador in format_array["Pagadoras"].items():
+    #        main(args.new_file, id_pagador, format_array, args.flag, args.debug, pagadora)
+    #else:
+    #    main(args.new_file, args.id_pagador, format_array, args.flag, args.debug)
