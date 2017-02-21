@@ -16,11 +16,9 @@ function enviarURL(){
         var idGrupoPagador = '{{ id_grupos_pagador}}';
         var moneda = '{{ id_monedas }}';
         var pagadora = document.getElementById('parametroPagadoras').value;
-
         var selectedValues = $('#parametroPagadoras').val();
 
-
-        var url = '/Willyfog/step5?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='
+        var url = '/Willyfog/step15?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='
         +idGrupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+selectedValues+'&parametroFichero='+fichero+'&parametroModo='+modo;
         window.location.href=url;
 	}	

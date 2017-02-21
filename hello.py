@@ -65,6 +65,18 @@ def pagadora_page2():
 
     return render_template('14pagadora_page.html', **locals())
 
+@app.route('/Willyfog/step15', methods=['POST', 'GET'])
+def results_page2():
+    pagadoras = request.args.get('parametroPagadoras')
+    id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadoras, 'TBL_PAGADOR')
+    #new_file = request.args.get('parametroFichero')
+    #modo = request.args.get('parametroModo')
+    # puntos_pago = select_puntospago(cursor, id_pagadora)
+    #print(id_pagadora)
+
+    # insert, remove, update = temp.main(new_file, 'format.txt', id_pagadora, modo, 0)
+    return render_template('15results_page.html', **locals())
+
 @app.route('/Willyfog/step2new', methods=['POST', 'GET'])
 def pagadora_page22():
     grupos_pagador = request.args.get('parametroGrupoPagador')
