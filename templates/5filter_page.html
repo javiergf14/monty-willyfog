@@ -23,8 +23,8 @@ function enviarURL(){
         var selectedFormaPago = $('#parametroFormaPago').val();
         var selectedMonedas = $('#parametroMonedas').val();
 
-        var url = '/Willyfog/step62?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroPaises='+selectedPaises
-        +'&parametroFormaPago='+selectedFormaPago+'&parametroMonedas='+selectedMonedas;
+        var url = '/Willyfog/step62?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador
+        +'&parametroPaises='+selectedPaises+'&parametroFormaPago='+selectedFormaPago+'&parametroMonedas='+selectedMonedas;
         window.location.href=url;
 
 	}	
