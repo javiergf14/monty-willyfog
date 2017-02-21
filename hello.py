@@ -82,7 +82,7 @@ def results_page2():
     mode = request.args.get('parametroModo')
 
     for p in pagadoras:
-        insert, remove, update = main(new_file, p[1], mode, 0)
+        insert, remove, update = main('data/processed/'+new_file, p[1], mode, 0)
     return render_template('15results_page.html', **locals())
 
 @app.route('/Willyfog/step2new', methods=['POST', 'GET'])
