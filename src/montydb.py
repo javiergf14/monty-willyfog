@@ -301,7 +301,7 @@ def select_pagadora(cursor, grupos_pagador=None, codigo_pais=None, id_monedas=No
         sqlquery += first_and * "AND " + "Id_Moneda =" + str(id_monedas)
         first_and = True
     if forma_pago:
-        sqlquery += first_and * "AND " + "Forma_Pago =" + str(forma_pago)
+        sqlquery += first_and * "AND " + "Forma_Pago =" + '"'+str(forma_pago)+'"'
 
     cursor.execute(sqlquery)
     array = []
