@@ -69,25 +69,7 @@ def pagadora_page():
 
 
 @app.route('/Willyfog/step5', methods=['POST', 'GET'])
-def results_page():
-    raw_pagadoras = request.args.get('parametroPagadoras')
-    raw_pagadoras = raw_pagadoras.split(",")
-
-    pagadoras = []
-    for p in raw_pagadoras:
-        id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
-        pagadoras.append([p, id_pagadora])
-
-    new_file = request.args.get('parametroFichero')
-    mode = request.args.get('parametroModo')
-
-    for p in pagadoras:
-        insert, remove, update = main('data/processed/'+new_file, p[1], mode, 0)
-    return render_template('5results_page.html', **locals())
-
-
-@app.route('/Willyfog/step2new', methods=['POST', 'GET'])
-def pagadora_page22():
+def filter_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
     pagadoras_info = select_pagadoras4(cursor, id_grupos_pagador)
@@ -103,7 +85,28 @@ def pagadora_page22():
     paises = list(paises)
     formas_pago = list(formas_pago)
     monedas = list(monedas)
-    return render_template('2pagadora_page2.html', **locals())
+    return render_template('5filter_page.html', **locals())
+
+
+@app.route('/Willyfog/step6', methods=['POST', 'GET'])
+def results_page():
+    raw_pagadoras = request.args.get('parametroPagadoras')
+    raw_pagadoras = raw_pagadoras.split(",")
+
+    pagadoras = []
+    for p in raw_pagadoras:
+        id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
+        pagadoras.append([p, id_pagadora])
+
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
+
+    for p in pagadoras:
+        insert, remove, update = main('data/processed/'+new_file, p[1], mode, 0)
+    return render_template('6results_page.html', **locals())
+
+
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=80)
