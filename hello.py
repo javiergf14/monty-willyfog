@@ -6,8 +6,8 @@ This is a temporary script file.
 """
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from src import secrets
-from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas, \
-    select_pagadoras, select_puntospago, select_monedas2, select_pagadoras2, select_pagadoras3, select_pagadoras4
+from src.montydb import connection, select_all, select_where, \
+    select_monedas, select_pagadoras_by_moneda, select_pagadoras_name, select_pagadoras_complete
 from src.willyfog import main
 
 
@@ -44,7 +44,7 @@ def moneda_page():
     pais = request.args.get('parametroPais')
     codigo_pais = select_where(cursor, 'Id', 'Nombre', pais, 'TBL_PAIS')
 
-    monedas = select_monedas2(cursor, codigo_pais)
+    monedas = select_monedas(cursor, codigo_pais)
 
     return render_template('3moneda_page.html', **locals())
 
@@ -58,9 +58,9 @@ def pagadora_page():
 
     if monedas:
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
-        pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
+        pagadoras = select_pagadoras_by_moneda(cursor, codigo_pais, id_monedas, id_grupos_pagador)
     else:
-        pagadoras = select_pagadoras3(cursor, id_grupos_pagador)
+        pagadoras = select_pagadoras_name(cursor, id_grupos_pagador)
 
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
@@ -72,7 +72,7 @@ def pagadora_page():
 def filter_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
-    pagadoras_info = select_pagadoras4(cursor, id_grupos_pagador)
+    pagadoras_info = select_pagadoras_complete(cursor, id_grupos_pagador)
 
     paises = set()
     formas_pago = set()

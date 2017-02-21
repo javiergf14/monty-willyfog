@@ -275,33 +275,7 @@ def select_where(cursor, parameter, condition, value, table):
     return cursor.fetchone()[0]
 
 
-def select_formas_pago(cursor, codigo_pais):
-    sqlquery = "select distinct fp.id as id, fp.nombre as nombre from tbl_forma_pago fp inner join tbl_sucursal suc on fp.id = suc.tipoPagoAgente inner join tbl_pagador p    on p.id = suc.id_pagador where p.id_pais = {}".format(
-        codigo_pais)
-    cursor.execute(sqlquery)
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[1]))
-        row = cursor.fetchone()
-    return array
-
-
-def select_monedas(cursor, codigo_pais, id_forma_pago):
-    sqlquery = 'select distinct mon.id as idMoneda, mon.nombre as nombreMoneda from tbl_moneda mon inner join ' \
-               'tbl_pagador p on mon.id = p.id_moneda inner join tbl_sucursal suc on p.id = suc.id_pagador where ' \
-               'p.id_pais = {} AND suc.tipoPagoAgente = {}'.format(
-        codigo_pais, id_forma_pago)
-    cursor.execute(sqlquery)
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[1]))
-        row = cursor.fetchone()
-    return array
-
-
-def select_monedas2(cursor, codigo_pais):
+def select_monedas(cursor, codigo_pais):
     sqlquery = 'select distinct mon.id as idMoneda, mon.nombre as nombreMoneda from tbl_moneda mon inner join ' \
                'tbl_pagador p on mon.id = p.id_moneda where ' \
                'p.id_pais = {}'.format(codigo_pais)
@@ -314,18 +288,7 @@ def select_monedas2(cursor, codigo_pais):
     return array
 
 
-def select_pagadoras(cursor, codigo_pais, forma_pago, id_monedas, grupos_pagador):
-    sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_pais = {} AND Forma_Pago = '{}' AND Id_Moneda = {} " \
-               "AND Id_GrupoPagador = {}".format(codigo_pais, forma_pago, id_monedas, grupos_pagador)
-    cursor.execute(sqlquery)
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row[0]))
-        row = cursor.fetchone()
-    return array
-
-def select_pagadoras2(cursor, codigo_pais, id_monedas, grupos_pagador):
+def select_pagadoras_by_moneda(cursor, codigo_pais, id_monedas, grupos_pagador):
     sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_pais = {} AND Id_Moneda = {} " \
                "AND Id_GrupoPagador = {}".format(codigo_pais, id_monedas, grupos_pagador)
     cursor.execute(sqlquery)
@@ -337,7 +300,7 @@ def select_pagadoras2(cursor, codigo_pais, id_monedas, grupos_pagador):
     return array
 
 
-def select_pagadoras3(cursor, grupos_pagador):
+def select_pagadoras_name(cursor, grupos_pagador):
     sqlquery = "select Empresa FROM TBL_PAGADOR WHERE Id_GrupoPagador = {}".format(grupos_pagador)
     cursor.execute(sqlquery)
     array = []
@@ -347,7 +310,7 @@ def select_pagadoras3(cursor, grupos_pagador):
         row = cursor.fetchone()
     return array
 
-def select_pagadoras4(cursor, grupos_pagador):
+def select_pagadoras_complete(cursor, grupos_pagador):
     sqlquery = "select pais.Nombre, pag.Forma_Pago, mon.Nombre FROM TBL_PAGADOR pag " \
                "inner join tbl_pais pais on pais.id = pag.Id_Pais inner join tbl_moneda mon on mon.id = pag.Id_Moneda " \
                "WHERE pag.Id_GrupoPagador = {}".format(grupos_pagador)
@@ -357,15 +320,5 @@ def select_pagadoras4(cursor, grupos_pagador):
     row = cursor.fetchone()
     while row:
         array.append((row[0], row[1], row[2]))
-        row = cursor.fetchone()
-    return array
-
-def select_puntospago(cursor, id_pagadora):
-    sqlquery = "select * FROM TBL_SUCURSAL WHERE Id_pagador={}".format(id_pagadora)
-    cursor.execute(sqlquery)
-    array = []
-    row = cursor.fetchone()
-    while row:
-        array.append((row))
         row = cursor.fetchone()
     return array
