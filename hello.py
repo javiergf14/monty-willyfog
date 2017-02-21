@@ -55,15 +55,17 @@ def pagadora_page2():
 
     monedas = request.args.get('parametroMoneda')
 
+
     if monedas:
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
         pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
     else:
         pagadoras = select_pagadoras3(cursor, id_grupos_pagador)
-
-
+        id_monedas = -1
+        codigo_pais = -1
 
     return render_template('14pagadora_page.html', **locals())
+
 
 @app.route('/Willyfog/step15', methods=['POST', 'GET'])
 def results_page2():
