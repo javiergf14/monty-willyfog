@@ -54,16 +54,12 @@ def pagadora_page2():
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
     monedas = request.args.get('parametroMoneda')
 
-    modo = -1
-    fichero = -1
 
     if monedas:
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
         pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
     else:
         pagadoras = select_pagadoras3(cursor, id_grupos_pagador)
-        id_monedas = -1
-        codigo_pais = -1
 
     return render_template('14pagadora_page.html', **locals())
 
@@ -71,7 +67,8 @@ def pagadora_page2():
 @app.route('/Willyfog/step15', methods=['POST', 'GET'])
 def results_page2():
     pagadoras = request.args.get('parametroPagadoras')
-    id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadoras, 'TBL_PAGADOR')
+    #id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadoras, 'TBL_PAGADOR')
+    id_pagadora = 0
     #new_file = request.args.get('parametroFichero')
     #modo = request.args.get('parametroModo')
     # puntos_pago = select_puntospago(cursor, id_pagadora)
