@@ -74,7 +74,7 @@ def results_page2():
         id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
         new_pagadoras.append([p, id_pagadora])
 
-    pagaodras = new_pagadoras
+    pagadoras = new_pagadoras
     #new_file = request.args.get('parametroFichero')
     #modo = request.args.get('parametroModo')
     # puntos_pago = select_puntospago(cursor, id_pagadora)
