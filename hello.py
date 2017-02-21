@@ -54,31 +54,30 @@ def pagadora_page2():
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
     monedas = request.args.get('parametroMoneda')
 
-
     if monedas:
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
         pagadoras = select_pagadoras2(cursor, codigo_pais, id_monedas, id_grupos_pagador)
     else:
         pagadoras = select_pagadoras3(cursor, id_grupos_pagador)
 
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
+
     return render_template('14pagadora_page.html', **locals())
 
 
 @app.route('/Willyfog/step15', methods=['POST', 'GET'])
 def results_page2():
-    pagadoras = request.args.get('parametroPagadoras')
-    pagadoras = pagadoras.split(",")
+    raw_pagadoras = request.args.get('parametroPagadoras')
+    raw_pagadoras = raw_pagadoras.split(",")
 
-    new_pagadoras = []
-    for p in pagadoras:
+    pagadoras = []
+    for p in raw_pagadoras:
         id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
-        new_pagadoras.append([p, id_pagadora])
+        pagadoras.append([p, id_pagadora])
 
-    pagadoras = new_pagadoras
-    #new_file = request.args.get('parametroFichero')
-    #modo = request.args.get('parametroModo')
-    # puntos_pago = select_puntospago(cursor, id_pagadora)
-    #print(id_pagadora)
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
 
     # insert, remove, update = temp.main(new_file, 'format.txt', id_pagadora, modo, 0)
     return render_template('15results_page.html', **locals())

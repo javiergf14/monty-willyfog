@@ -12,10 +12,12 @@
 <script>
 function enviarURL(){
 
+        var fichero = {{ new_file }};
+        var modo = {{ mode }};
 		var pagadora = document.getElementById('parametroPagadoras').value;
         var selectedValues = $('#parametroPagadoras').val();
 
-        var url = '/Willyfog/step15?parametroPagadoras='+selectedValues;
+        var url = '/Willyfog/step15?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroPagadoras='+selectedValues;
         window.location.href=url;
 	}	
 
