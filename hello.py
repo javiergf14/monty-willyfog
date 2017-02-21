@@ -117,7 +117,7 @@ def results_page2():
     formaPago = request.args.get('parametroFormaPago')
     monedas = request.args.get('parametroMonedas')
 
-    return render_template('6results_page.html', **locals())
+    return render_template('62results_page.html', **locals())
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=80)
