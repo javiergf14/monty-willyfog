@@ -12,10 +12,7 @@
 <script>
 function enviarURL(){
 
-		var toPais = '{{ codigo_pais }}';
-        var idGrupoPagador = '{{ id_grupos_pagador}}';
-        var moneda = '{{ id_monedas }}';
-        var pagadora = document.getElementById('parametroPagadoras').value;
+		var pagadora = document.getElementById('parametroPagadoras').value;
         var selectedValues = $('#parametroPagadoras').val();
 
         var url = '/Willyfog/step15?parametroPagadoras='+selectedValues;
