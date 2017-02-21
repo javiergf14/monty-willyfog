@@ -31,26 +31,26 @@ def grupo_pagador_page():
     return render_template('1grupo_pagador_page.html', **locals())
 
 
-@app.route('/Willyfog/step12', methods=['POST', 'GET'])
+@app.route('/Willyfog/step2', methods=['POST', 'GET'])
 def paises_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
-
     paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
-    return render_template('12paises_page.html', **locals())
 
-@app.route('/Willyfog/step13', methods=['POST', 'GET'])
-def moneda2_page():
+    return render_template('2paises_page.html', **locals())
+
+@app.route('/Willyfog/step3', methods=['POST', 'GET'])
+def moneda_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
     pais = request.args.get('parametroPais')
     codigo_pais = select_where(cursor, 'Id', 'Nombre', pais, 'TBL_PAIS')
 
     monedas = select_monedas2(cursor, codigo_pais)
 
-    return render_template('13moneda_page.html', **locals())
+    return render_template('3moneda_page.html', **locals())
 
 
-@app.route('/Willyfog/step14', methods=['POST', 'GET'])
-def pagadora_page2():
+@app.route('/Willyfog/step4', methods=['POST', 'GET'])
+def pagadora_page():
     codigo_pais = request.args.get('parametroPais')
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
@@ -65,11 +65,11 @@ def pagadora_page2():
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
 
-    return render_template('14pagadora_page.html', **locals())
+    return render_template('4pagadora_page.html', **locals())
 
 
-@app.route('/Willyfog/step15', methods=['POST', 'GET'])
-def results_page2():
+@app.route('/Willyfog/step5', methods=['POST', 'GET'])
+def results_page():
     raw_pagadoras = request.args.get('parametroPagadoras')
     raw_pagadoras = raw_pagadoras.split(",")
 
@@ -83,7 +83,8 @@ def results_page2():
 
     for p in pagadoras:
         insert, remove, update = main('data/processed/'+new_file, p[1], mode, 0)
-    return render_template('15results_page.html', **locals())
+    return render_template('5results_page.html', **locals())
+
 
 @app.route('/Willyfog/step2new', methods=['POST', 'GET'])
 def pagadora_page22():
@@ -103,58 +104,6 @@ def pagadora_page22():
     formas_pago = list(formas_pago)
     monedas = list(monedas)
     return render_template('2pagadora_page2.html', **locals())
-
-
-@app.route('/Willyfog/step2', methods=['POST', 'GET'])
-def forma_pago_page():
-    pais = request.args.get('parametroPais')
-    grupos_pagador = request.args.get('parametroGrupoPagador')
-
-    id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
-
-    codigo_pais = select_where(cursor, 'Id', 'Nombre', pais, 'TBL_PAIS')
-    formas_pago = select_formas_pago(cursor, codigo_pais)
-    return render_template('2forma_pago_page.html', **locals())
-
-
-@app.route('/Willyfog/step3', methods=['POST', 'GET'])
-def moneda_page():
-    codigo_pais = request.args.get('parametroPais')
-    grupos_pagador = request.args.get('parametroGrupoPagador')
-    forma_pago = request.args.get('parametroFormaPago')
-
-    id_forma_pago = select_where(cursor, 'Id', 'Nombre', forma_pago, 'TBL_FORMA_PAGO')
-
-    monedas = select_monedas(cursor, codigo_pais, id_forma_pago)
-
-    return render_template('moneda_page.html', **locals())
-
-
-@app.route('/Willyfog/step4', methods=['POST', 'GET'])
-def pagadora_page():
-    codigo_pais = request.args.get('parametroPais')
-    grupos_pagador = request.args.get('parametroGrupoPagador')
-    forma_pago = request.args.get('parametroFormaPago')
-    monedas = request.args.get('parametroMoneda')
-    id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
-
-    pagadoras = select_pagadoras(cursor, codigo_pais, forma_pago, id_monedas, grupos_pagador)
-
-    return render_template('pagadora_page.html', **locals())
-
-
-@app.route('/Willyfog/step5', methods=['POST', 'GET'])
-def results_page():
-    pagadoras = request.args.get('parametroPagadoras')
-    id_pagadora = select_where(cursor, 'Id', 'Empresa', pagadoras, 'TBL_PAGADOR')
-    #new_file = request.args.get('parametroFichero')
-    #modo = request.args.get('parametroModo')
-    # puntos_pago = select_puntospago(cursor, id_pagadora)
-    #print(id_pagadora)
-
-    # insert, remove, update = temp.main(new_file, 'format.txt', id_pagadora, modo, 0)
-    return render_template('results_page.html', **locals())
-
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=80)
