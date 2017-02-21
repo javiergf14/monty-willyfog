@@ -288,17 +288,20 @@ def select_monedas(cursor, codigo_pais):
     return array
 
 
-def select_pagadora(cursor, codigo_pais=None, id_monedas=None, grupos_pagador=None):
+def select_pagadora(cursor, grupos_pagador=None, codigo_pais=None, id_monedas=None, forma_pago=None):
     first_and = False
     sqlquery = "select Empresa FROM TBL_PAGADOR WHERE "
-    if(codigo_pais):
-        sqlquery += "Id_pais =" + str(codigo_pais)
+    if grupos_pagador:
+        sqlquery += "Id_GrupoPagador =" + str(grupos_pagador)
         first_and = True
-    if(id_monedas):
+    if codigo_pais:
+        sqlquery += first_and * "AND " + "Id_pais =" + str(codigo_pais)
+        first_and = True
+    if id_monedas:
         sqlquery += first_and * "AND " + "Id_Moneda =" + str(id_monedas)
         first_and = True
-    if(grupos_pagador):
-        sqlquery += first_and * "AND " + "Id_GrupoPagador =" + str(grupos_pagador)
+    if forma_pago:
+        sqlquery += first_and * "AND " + "Forma_Pago =" + str(forma_pago)
 
     cursor.execute(sqlquery)
     array = []

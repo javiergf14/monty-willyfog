@@ -58,9 +58,9 @@ def pagadora_page():
 
     if monedas:
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
-        pagadoras = select_pagadora(cursor, codigo_pais, id_monedas, id_grupos_pagador)
+        pagadoras = select_pagadora(cursor,  id_grupos_pagador, codigo_pais, id_monedas)
     else:
-        pagadoras = select_pagadora(cursor, None, None, id_grupos_pagador)
+        pagadoras = select_pagadora(cursor, id_grupos_pagador)
 
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
@@ -116,6 +116,16 @@ def results_page2():
     paises = request.args.get('parametroPaises')
     forma_pago = request.args.get('parametroFormaPago')
     monedas = request.args.get('parametroMonedas')
+
+    codigo_pais = None
+    if(paises):
+        codigo_pais = select_where(cursor, 'Id', 'Nombre', paises, 'TBL_PAIS')
+
+    id_moneda = None
+    if(monedas):
+        id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
+
+    pagadoras = select_pagadora(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_moneda=id_moneda, forma_pago=forma_pago)
 
     return render_template('62results_page.html', **locals())
 
