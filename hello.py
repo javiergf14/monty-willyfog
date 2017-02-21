@@ -114,7 +114,7 @@ def results_page2():
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
     paises = request.args.get('parametroPaises')
-    formaPago = request.args.get('parametroFormaPago')
+    forma_pago = request.args.get('parametroFormaPago')
     monedas = request.args.get('parametroMonedas')
 
     return render_template('62results_page.html', **locals())
