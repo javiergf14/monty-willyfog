@@ -110,8 +110,7 @@ def results_page():
 
 @app.route('/Willyfog/step62', methods=['POST', 'GET'])
 def results_page2():
-    grupos_pagador = request.args.get('parametroGrupoPagador')
-    id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
+    id_grupos_pagador = request.args.get('parametroGrupoPagador')
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
     paises = request.args.get('parametroPaises')
