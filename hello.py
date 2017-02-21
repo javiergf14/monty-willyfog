@@ -121,11 +121,11 @@ def results_page2():
     if(paises):
         codigo_pais = select_where(cursor, 'Id', 'Nombre', paises, 'TBL_PAIS')
 
-    id_moneda = None
+    id_monedas = None
     if(monedas):
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
 
-    pagadoras = select_pagadora(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_moneda=id_moneda, forma_pago=forma_pago)
+    pagadoras = select_pagadora(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_monedas=id_monedas, forma_pago=forma_pago)
 
     return render_template('62results_page.html', **locals())
 
