@@ -8,7 +8,7 @@ from src import secrets, montydb
 
 def main(new_csv, id_pagador, flag, debug, pagadora=None):
     # Loading the format file
-    with open("../data/formats/format_" + str(id_pagador) + ".txt", "r") as f:
+    with open("data/formats/format_" + str(id_pagador) + ".txt", "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
 
