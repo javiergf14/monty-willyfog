@@ -52,9 +52,10 @@ def pagadora_page2():
     codigo_pais = request.args.get('parametroPais')
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
-
     monedas = request.args.get('parametroMoneda')
 
+    modo = -1
+    fichero = -1
 
     if monedas:
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
