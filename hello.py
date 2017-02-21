@@ -8,6 +8,7 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 from src import secrets
 from src.montydb import connection, select_all, select_where, select_formas_pago, select_monedas, \
     select_pagadoras, select_puntospago, select_monedas2, select_pagadoras2, select_pagadoras3, select_pagadoras4
+from src.willyfog import main
 
 # FLASK section.
 app = Flask(__name__)
@@ -79,7 +80,8 @@ def results_page2():
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
 
-    # insert, remove, update = temp.main(new_file, 'format.txt', id_pagadora, modo, 0)
+    for p in pagadoras:
+        insert, remove, update = main(new_file, p[1], mode, 0)
     return render_template('15results_page.html', **locals())
 
 @app.route('/Willyfog/step2new', methods=['POST', 'GET'])
