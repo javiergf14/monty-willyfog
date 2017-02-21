@@ -10,6 +10,7 @@ from src.montydb import connection, select_all, select_where, select_formas_pago
     select_pagadoras, select_puntospago, select_monedas2, select_pagadoras2, select_pagadoras3, select_pagadoras4
 from src.willyfog import main
 
+
 # FLASK section.
 app = Flask(__name__)
 

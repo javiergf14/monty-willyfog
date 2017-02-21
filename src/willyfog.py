@@ -3,10 +3,8 @@ import argparse
 import unidecode
 import pandas as pd
 import copy
-import secrets # Script where credentials are stored.
-import montydb
+from src import secrets, montydb
 
- 
 def main(new_csv, id_pagador, format_array, flag, debug, pagadora=None):
     # Database parameters
     table_name = 'TBL_SUCURSAL' 
