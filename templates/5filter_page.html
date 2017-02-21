@@ -41,6 +41,7 @@ País destino: &nbsp; Forma pago:  &nbsp;  Moneda destino:
 
 <form id="formularioPaises" name="formularioPaises">
 
+    <input type="text" onKeyUp="sel(this.value)"><br>
     <select name="listaPaises" id="parametroPaises" multiple>
     </select>
 </form>
@@ -93,6 +94,30 @@ País destino: &nbsp; Forma pago:  &nbsp;  Moneda destino:
    	}
 
 </script>
+
+<script>
+	function sel(c){
+		c = c.toUpperCase();
+		formu=document.forms['formularioPaises'];
+		caracteres=c.length;
+		if(caracteres!=0){
+		for (x=0;x<formu['listaPaises'].options.length;x++){
+			if(formu['listaPaises'].options[x].value.slice(0,caracteres)==c){
+				formu['listaPaises'].selectedIndex=x;
+				formu['listaPaises'].style.visibility="visible";
+				break;
+			}else{
+				formu['listaPaises'].style.visibility="hidden";
+			}
+		}
+		}else{
+			formu['lista'].style.visibility="hidden";
+		}
+	}
+
+</script>
+
+<br>
 <br>
 TODO: por agrupaciones
 
