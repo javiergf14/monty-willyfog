@@ -72,7 +72,7 @@ def results_page2():
     new_pagadoras = []
     for p in pagadoras:
         id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
-        new_pagadoras.append(p, id_pagadora)
+        new_pagadoras.append([p, id_pagadora])
 
     pagaodras = new_pagadoras
     #new_file = request.args.get('parametroFichero')
