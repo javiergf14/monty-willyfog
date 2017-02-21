@@ -18,8 +18,7 @@ function enviarURL(){
         var pagadora = document.getElementById('parametroPagadoras').value;
         var selectedValues = $('#parametroPagadoras').val();
 
-        var url = '/Willyfog/step15?parametroPais='+toPais+'&parametroFormaPago='+formaPago+'&parametroGrupoPagador='
-        +idGrupoPagador+'&parametroMoneda='+moneda+'&parametroPagadoras='+selectedValues+'&parametroFichero='+fichero+'&parametroModo='+modo;
+        var url = '/Willyfog/step15?parametroPagadoras='+selectedValues;
         window.location.href=url;
 	}	
 
