@@ -15,6 +15,17 @@ form { display: inline; }
 <script>
 function enviarURL(){
 
+        var fichero = '{{ new_file }}';
+        var modo = '{{ mode }}';
+        var grupoPagador = '{{ id_grupos_pagador}}';
+
+        var selectedPaises = $('#parametroPaises').val();
+        var selectedFormaPago = $('#parametroFormaPago').val();
+        var selectedMonedas = $('#parametroMonedas').val();
+
+        var url = '/Willyfog/step62?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroPaises='+selectedPaises
+        +'&parametroFormaPago='+selectedFormaPago+'&parametroMonedas='+selectedMonedas;
+        window.location.href=url;
 
 	}	
 

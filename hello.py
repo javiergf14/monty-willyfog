@@ -73,6 +73,8 @@ def filter_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
     pagadoras_info = select_pagadoras_complete(cursor, id_grupos_pagador)
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
 
     paises = set()
     formas_pago = set()
@@ -106,7 +108,17 @@ def results_page():
     return render_template('6results_page.html', **locals())
 
 
+@app.route('/Willyfog/step62', methods=['POST', 'GET'])
+def results_page2():
+    grupos_pagador = request.args.get('parametroGrupoPagador')
+    id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
+    paises = request.args.get('parametroPaises')
+    formaPago = request.args.get('parametroFormaPago')
+    monedas = request.args.get('parametroMonedas')
 
+    return render_template('6results_page.html', **locals())
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=80)
