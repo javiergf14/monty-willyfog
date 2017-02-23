@@ -148,7 +148,8 @@ def results_page2():
 def results_page3():
 
     id_filtered_pagadoras = request.args.get('parametroPagadoras')
-
+    id_filtered_pagadoras = list(id_filtered_pagadoras)
+    id_filtered_pagadoras = [int(id) for id in id_filtered_pagadoras]
     with open("data/formats/format_MORE.txt", "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
