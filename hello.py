@@ -168,7 +168,7 @@ def results_page3():
     to_return2 = []
     for id in to_return:
         to_return2.append(format_array["Pagadoras"][str(id)])
-        insert, remove, update = main('data/processed/' + new_file, id, mode, 0, True)
+        insert, remove, update = main('data/processed/' + new_file, id, mode, 0, "MORE")
 
     return render_template('7results_page.html', **locals())
 

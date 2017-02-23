@@ -6,9 +6,12 @@ import copy
 from src import secrets, montydb
 
 
-def main(new_csv, id_pagador, flag, debug, pagadora=False):
+def main(new_csv, id_pagador, flag, debug, grupo_pagador=False):
     # Loading the format file
-    with open("data/formats/format_" + str(id_pagador) + ".txt", "r") as f:
+    format_id = id_pagador
+    if(grupo_pagador): format_id = grupo_pagador
+
+    with open("data/formats/format_" + str(format_id) + ".txt", "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
 
@@ -37,7 +40,7 @@ def main(new_csv, id_pagador, flag, debug, pagadora=False):
     
     # Load new information.
     raw_doc = pd.read_csv(new_csv, sep=";", header=None, encoding="ISO-8859-1")
-    if pagadora:
+    if grupo_pagador:
         raw_doc = raw_doc[raw_doc[format_array["CampoPagadora"]-1] == format_array["Pagadoras"][str(id_pagador)]]
         # Let us remove unused format fields.
         local_format_array = copy.deepcopy(format_array)
