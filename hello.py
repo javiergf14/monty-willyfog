@@ -135,9 +135,12 @@ def results_page2():
     pagadoras_in_file_ids =  list(format_array['Pagadoras'].values())
 
     to_return = []
+    to_values = []
     for id, p in pagadoras:
        if id in pagadoras_in_file_ids:
-           to_return.append(p)
+            to_return.append(p)
+            to_values.append(id)
+
 
     return render_template('62results_page.html', **locals())
 
