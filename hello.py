@@ -127,6 +127,11 @@ def results_page2():
 
     pagadoras = select_pagadora(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_monedas=id_monedas, forma_pago=forma_pago)
 
+    import json
+    with open("data/formats/format_MORE.txt", "r") as f:
+        format_json = f.read()
+    format_array = json.loads(format_json)
+
     return render_template('62results_page.html', **locals())
 
 if __name__ == "__main__":
