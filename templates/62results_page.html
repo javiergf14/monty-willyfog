@@ -31,12 +31,12 @@ Las pagadoras que cumplen los filtros son las siguiente, ¿quiere descartar algu
 <script>
 	var i;
 	var array = {{ to_return|tojson }};
-
+	var array2 = {{ to_values|tojson }};
 	for (i = 0; i < array.length; i++) {
 	    	var x = document.getElementById("parametroPagadoras");
     		var option = document.createElement("option");
     		option.text = array[i];
-
+    		option.value = array2[i];
     		x.add(option);
    	}
 </script>
