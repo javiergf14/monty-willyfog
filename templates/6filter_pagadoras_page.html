@@ -14,8 +14,10 @@ function enviarURL(){
         var selectedPagadoras = $('#parametroPagadoras').val();
         var fichero = '{{ new_file }}';
         var modo = '{{ mode }}';
+        var grupoPagador = '{{ id_grupos_pagador}}';
 
-        var url = '/Willyfog/step7b?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroPagadoras='+selectedPagadoras;
+        var url = '/Willyfog/step7b?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador
+        +'&parametroPagadoras='+selectedPagadoras;
         window.location.href=url;
 
 	}

@@ -7,11 +7,14 @@ from src import secrets, montydb
 
 
 def main(new_csv, id_pagador, flag, debug, grupo_pagador=False):
-    # Loading the format file
-    format_id = id_pagador
-    if(grupo_pagador): format_id = grupo_pagador
 
-    with open("data/formats/format_" + str(format_id) + ".txt", "r") as f:
+    # Loading the format file
+    if grupo_pagador: # Multiple pagadoras within a grupo_pagador file.
+        format_file_path = "data/formats/grupos_pagador/format_" + str(grupo_pagador) + ".txt"
+    else: # Single pagadora.
+        format_file_path = "data/formats/pagadoras/format_" + str(id_pagador) + ".txt"
+
+    with open(format_file_path, "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
 

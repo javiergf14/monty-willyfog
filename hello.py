@@ -110,7 +110,7 @@ def filter_pagadoras_page():
 
     pagadoras = select_pagadora_id(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_monedas=id_monedas, forma_pago=forma_pago)
 
-    with open("data/formats/format_MORE.txt", "r") as f:
+    with open("data/formats/grupos_pagador/format_" + str(id_grupos_pagador) + ".txt", "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
 
@@ -149,13 +149,15 @@ def results_page():
 
 
 @app.route('/Willyfog/step7b', methods=['POST', 'GET'])
-def results_page3():
+def results_page2():
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
+    id_grupos_pagador = request.args.get('parametroGrupoPagador')
 
     id_filtered_pagadoras = request.args.get('parametroPagadoras').split(",")
     id_filtered_pagadoras = [int(id) for id in id_filtered_pagadoras]
-    with open("data/formats/format_MORE.txt", "r") as f:
+
+    with open("data/formats/grupos_pagador/format_" + str(id_grupos_pagador) + ".txt", "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
 
@@ -171,7 +173,7 @@ def results_page3():
     to_return2 = []
     for id in to_return:
         to_return2.append(format_array["Pagadoras"][str(id)])
-        insert, remove, update = main('data/processed/' + new_file, id, mode, 0, "MORE")
+        insert, remove, update = main('data/processed/' + new_file, id, mode, 0, id_grupos_pagador)
 
     return render_template('7bresults_page.html', **locals())
 
