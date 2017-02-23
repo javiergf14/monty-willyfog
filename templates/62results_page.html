@@ -5,24 +5,23 @@
 <div class="block1">
     <h1>Willyfog - Actualizacion de pagadoras</h1>
 </div>
-Pagadoras seleccionadas:
+Las pagadoras que cumplen los filtros son las siguiente, ¿quiere descartar alguna?
 <br>
-{{ pagadoras }}
-<br>
-{{ to_return }}
-{{ mode }}
-{{ new_file }}
-Inserciones:
-<br>
-{{ insert }}
-<br>
-Borrado:
-<br>
-{{ remove}}
-<br>
-Modificaciones:
-<br>
-{{ update }}
+<form id="formularioPagadoras" name="formularioPagadoras">
 
+    <select name="listaPagadoras" id="parametroPagadoras" multiple>
+    </select>
+</form>
+
+<script>
+	var i;
+	var array = {{ to_return|tojson }};
+	for (i = 0; i < array.length; i++) {
+	    	var x = document.getElementById("parametroPagadoras");
+    		var option = document.createElement("option");
+    		option.text = array[i];
+    		x.add(option);
+   	}
+</script>
 
 {% endblock %}
