@@ -132,6 +132,8 @@ def results_page2():
         format_json = f.read()
     format_array = json.loads(format_json)
 
+    pagadoras_in_file_ids =  format_array['Pagadoras'].values()
+
     return render_template('62results_page.html', **locals())
 
 if __name__ == "__main__":
