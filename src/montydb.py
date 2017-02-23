@@ -331,7 +331,7 @@ def select_pagadora_id(cursor, grupos_pagador=None, codigo_pais=None, id_monedas
     array = []
     row = cursor.fetchone()
     while row:
-        array.append((row[0]))
+        array.append((row[0], row[1]))
         row = cursor.fetchone()
     return array
 
