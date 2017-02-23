@@ -132,7 +132,7 @@ def results_page2():
         format_json = f.read()
     format_array = json.loads(format_json)
 
-    pagadoras_in_file_ids =  list(format_array['Pagadoras'].values())
+    pagadoras_in_file_ids =  list(format_array['Pagadoras'].keys())
 
     to_return = []
     to_values = []

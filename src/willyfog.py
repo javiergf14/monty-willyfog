@@ -6,7 +6,7 @@ import copy
 from src import secrets, montydb
 
 
-def main(new_csv, id_pagador, flag, debug, pagadora=None):
+def main(new_csv, id_pagador, flag, debug, pagadora=False):
     # Loading the format file
     with open("data/formats/format_" + str(id_pagador) + ".txt", "r") as f:
         format_json = f.read()
