@@ -163,6 +163,9 @@ def results_page3():
         if id not in list(id_filtered_pagadoras):
             to_return.append(id)
 
+    to_return2 = []
+    for id in to_return:
+        to_return2.append(format_array["CampoPagadora"][str(id)])
 
     return render_template('7results_page.html', **locals())
 
