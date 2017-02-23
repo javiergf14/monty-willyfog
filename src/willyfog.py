@@ -38,7 +38,7 @@ def main(new_csv, id_pagador, flag, debug, pagadora=False):
     # Load new information.
     raw_doc = pd.read_csv(new_csv, sep=";", header=None, encoding="ISO-8859-1")
     if pagadora:
-        raw_doc = raw_doc[raw_doc[format_array["CampoPagadora"]-1] == format_array["CampoPagadora"][str(id_pagador)]]
+        raw_doc = raw_doc[raw_doc[format_array["CampoPagadora"]-1] == format_array["Pagadoras"][str(id_pagador)]]
         # Let us remove unused format fields.
         local_format_array = copy.deepcopy(format_array)
         local_format_array.pop("CampoPagadora", None)

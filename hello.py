@@ -165,7 +165,7 @@ def results_page3():
 
     to_return2 = []
     for id in to_return:
-        to_return2.append(format_array["CampoPagadora"][str(id)])
+        to_return2.append(format_array["Pagadoras"][str(id)])
 
     return render_template('7results_page.html', **locals())
 
