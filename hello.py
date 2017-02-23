@@ -147,6 +147,8 @@ def results_page2():
 
 @app.route('/Willyfog/step7', methods=['POST', 'GET'])
 def results_page3():
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
 
     id_filtered_pagadoras = request.args.get('parametroPagadoras').split(",")
     id_filtered_pagadoras = [int(id) for id in id_filtered_pagadoras]
@@ -166,6 +168,7 @@ def results_page3():
     to_return2 = []
     for id in to_return:
         to_return2.append(format_array["Pagadoras"][str(id)])
+        insert, remove, update = main('data/processed/' + new_file, id, mode, 0, True)
 
     return render_template('7results_page.html', **locals())
 
