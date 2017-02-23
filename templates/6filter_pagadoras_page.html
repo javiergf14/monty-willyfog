@@ -36,8 +36,8 @@ Las pagadoras que cumplen los filtros son las siguiente, ¿quiere descartar algu
 
 <script>
 	var i;
-	var array = {{ to_return|tojson }};
-	var array2 = {{ to_values|tojson }};
+	var array = {{ pagadoras_filter_names|tojson }};
+	var array2 = {{ pagadoras_filter_values|tojson }};
 	for (i = 0; i < array.length; i++) {
 	    	var x = document.getElementById("parametroPagadoras");
     		var option = document.createElement("option");

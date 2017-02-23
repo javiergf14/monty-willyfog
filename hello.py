@@ -117,12 +117,12 @@ def filter_pagadoras_page():
     pagadoras_in_file_ids =  list(format_array['Pagadoras'].keys())
     pagadoras_in_file_ids = [int(id) for id in pagadoras_in_file_ids]
 
-    to_return = []
-    to_values = []
+    pagadoras_filter_names = []
+    pagadoras_filter_values = []
     for id, p in pagadoras:
        if id in pagadoras_in_file_ids:
-            to_return.append(p)
-            to_values.append(id)
+           pagadoras_filter_names.append(p)
+           pagadoras_filter_values.append(id)
 
     return render_template('6filter_pagadoras_page.html', **locals())
 
@@ -147,7 +147,6 @@ def results_page():
 
 
 
-
 @app.route('/Willyfog/step7b', methods=['POST', 'GET'])
 def results_page2():
     new_file = request.args.get('parametroFichero')
@@ -164,16 +163,11 @@ def results_page2():
     pagadoras_in_file_ids =  list(format_array['Pagadoras'].keys())
     pagadoras_in_file_ids = [int(id) for id in pagadoras_in_file_ids]
 
-
-    to_return = []
+    pagadoras_selected = []
     for id in pagadoras_in_file_ids:
         if id not in list(id_filtered_pagadoras):
-            to_return.append(id)
-
-    to_return2 = []
-    for id in to_return:
-        to_return2.append(format_array["Pagadoras"][str(id)])
-        insert, remove, update = main('data/processed/' + new_file, id, mode, 0, id_grupos_pagador)
+            pagadoras_selected.append(id)
+            insert, remove, update = main('data/processed/' + new_file, id, mode, 0, id_grupos_pagador)
 
     return render_template('7bresults_page.html', **locals())
 
