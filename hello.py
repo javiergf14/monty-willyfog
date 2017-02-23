@@ -155,6 +155,8 @@ def results_page3():
     format_array = json.loads(format_json)
 
     pagadoras_in_file_ids =  list(format_array['Pagadoras'].keys())
+    pagadoras_in_file_ids = [int(id) for id in pagadoras_in_file_ids]
+
 
     to_return = []
     for id in pagadoras_in_file_ids:
