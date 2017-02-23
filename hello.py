@@ -7,7 +7,7 @@ This is a temporary script file.
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from src import secrets
 from src.montydb import connection, select_all, select_where, \
-    select_monedas, select_pagadora, select_pagadoras_complete
+    select_monedas, select_pagadora, select_pagadoras_complete, select_pagadora_id
 from src.willyfog import main
 
 
@@ -125,7 +125,7 @@ def results_page2():
     if(monedas):
         id_monedas = select_where(cursor, 'Id', 'Nombre', monedas, 'TBL_MONEDA')
 
-    pagadoras = select_pagadora(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_monedas=id_monedas, forma_pago=forma_pago)
+    pagadoras = select_pagadora_id(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_monedas=id_monedas, forma_pago=forma_pago)
 
     import json
     with open("data/formats/format_MORE.txt", "r") as f:

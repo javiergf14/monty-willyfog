@@ -312,6 +312,30 @@ def select_pagadora(cursor, grupos_pagador=None, codigo_pais=None, id_monedas=No
     return array
 
 
+def select_pagadora_id(cursor, grupos_pagador=None, codigo_pais=None, id_monedas=None, forma_pago=None):
+    first_and = False
+    sqlquery = "select Id, Empresa FROM TBL_PAGADOR WHERE "
+    if grupos_pagador:
+        sqlquery += "Id_GrupoPagador =" + str(grupos_pagador)
+        first_and = True
+    if codigo_pais:
+        sqlquery += first_and * "AND " + "Id_pais =" + str(codigo_pais)
+        first_and = True
+    if id_monedas:
+        sqlquery += first_and * "AND " + "Id_Moneda =" + str(id_monedas)
+        first_and = True
+    if forma_pago:
+        sqlquery += first_and * "AND " + "Forma_Pago =" + "'"+str(forma_pago)+"'"
+
+    cursor.execute(sqlquery)
+    array = []
+    row = cursor.fetchone()
+    while row:
+        array.append((row[0]))
+        row = cursor.fetchone()
+    return array
+
+
 def select_pagadoras_complete(cursor, grupos_pagador):
     sqlquery = "select pais.Nombre, pag.Forma_Pago, mon.Nombre FROM TBL_PAGADOR pag " \
                "inner join tbl_pais pais on pais.id = pag.Id_Pais inner join tbl_moneda mon on mon.id = pag.Id_Moneda " \
