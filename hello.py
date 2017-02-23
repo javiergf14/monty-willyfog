@@ -92,25 +92,7 @@ def filter_page():
 
 
 @app.route('/Willyfog/step6', methods=['POST', 'GET'])
-def results_page():
-    raw_pagadoras = request.args.get('parametroPagadoras')
-    raw_pagadoras = raw_pagadoras.split(",")
-
-    pagadoras = []
-    for p in raw_pagadoras:
-        id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
-        pagadoras.append([p, id_pagadora])
-
-    new_file = request.args.get('parametroFichero')
-    mode = request.args.get('parametroModo')
-
-    for p in pagadoras:
-        insert, remove, update = main('data/processed/'+new_file, p[1], mode, 0)
-    return render_template('6results_page.html', **locals())
-
-
-@app.route('/Willyfog/step62', methods=['POST', 'GET'])
-def results_page2():
+def filter_pagadoras_page():
     id_grupos_pagador = request.args.get('parametroGrupoPagador')
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
@@ -142,10 +124,31 @@ def results_page2():
             to_return.append(p)
             to_values.append(id)
 
-    return render_template('62results_page.html', **locals())
+    return render_template('6filter_pagadoras_page.html', **locals())
 
 
-@app.route('/Willyfog/step7', methods=['POST', 'GET'])
+
+@app.route('/Willyfog/step7a', methods=['POST', 'GET'])
+def results_page():
+    raw_pagadoras = request.args.get('parametroPagadoras')
+    raw_pagadoras = raw_pagadoras.split(",")
+
+    pagadoras = []
+    for p in raw_pagadoras:
+        id_pagadora = select_where(cursor, 'Id', 'Empresa', p, 'TBL_PAGADOR')
+        pagadoras.append([p, id_pagadora])
+
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
+
+    for p in pagadoras:
+        insert, remove, update = main('data/processed/'+new_file, p[1], mode, 0)
+    return render_template('7aresults_page.html', **locals())
+
+
+
+
+@app.route('/Willyfog/step7b', methods=['POST', 'GET'])
 def results_page3():
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
@@ -170,7 +173,7 @@ def results_page3():
         to_return2.append(format_array["Pagadoras"][str(id)])
         insert, remove, update = main('data/processed/' + new_file, id, mode, 0, "MORE")
 
-    return render_template('7results_page.html', **locals())
+    return render_template('7bresults_page.html', **locals())
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=80)
