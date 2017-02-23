@@ -157,7 +157,7 @@ def results_page3():
 
     to_return = []
     for id in pagadoras_in_file_ids:
-        if id not in id_filtered_pagadoras:
+        if id not in list(id_filtered_pagadoras):
             to_return.append(id)
 
 
