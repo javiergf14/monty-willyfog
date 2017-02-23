@@ -9,6 +9,7 @@ from src import secrets
 from src.montydb import connection, select_all, select_where, \
     select_monedas, select_pagadora, select_pagadoras_complete, select_pagadora_id
 from src.willyfog import main
+import json
 
 
 # FLASK section.
@@ -127,7 +128,6 @@ def results_page2():
 
     pagadoras = select_pagadora_id(cursor, id_grupos_pagador, codigo_pais=codigo_pais, id_monedas=id_monedas, forma_pago=forma_pago)
 
-    import json
     with open("data/formats/format_MORE.txt", "r") as f:
         format_json = f.read()
     format_array = json.loads(format_json)
@@ -146,6 +146,19 @@ def results_page2():
 
 @app.route('/Willyfog/step7', methods=['POST', 'GET'])
 def results_page3():
+
+    id_filtered_pagadoras = request.args.get('parametroPagadoras')
+
+    with open("data/formats/format_MORE.txt", "r") as f:
+        format_json = f.read()
+    format_array = json.loads(format_json)
+
+    pagadoras_in_file_ids =  list(format_array['Pagadoras'].values())
+
+    to_return = []
+    for id in pagadoras_in_file_ids:
+        if id not in id_filtered_pagadoras:
+            to_return.append(id)
 
 
     return render_template('7results_page.html', **locals())
