@@ -141,8 +141,14 @@ def results_page2():
             to_return.append(p)
             to_values.append(id)
 
-
     return render_template('62results_page.html', **locals())
+
+
+@app.route('/Willyfog/step7', methods=['POST', 'GET'])
+def results_page3():
+
+
+    return render_template('7results_page.html', **locals())
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=80)
