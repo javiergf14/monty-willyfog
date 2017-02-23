@@ -5,6 +5,16 @@
 <div class="block1">
     <h1>Willyfog - Actualizacion de pagadoras</h1>
 </div>
+
+function enviarURL(){
+
+        var selectedPagadoras = $('#parametroPagadoras').val();
+
+        var url = '/Willyfog/step7?parametroPagadoras='+selectedPagadoras;
+        window.location.href=url;
+
+	}
+
 Las pagadoras que cumplen los filtros son las siguiente, ¿quiere descartar alguna?
 <br>
 <form id="formularioPagadoras" name="formularioPagadoras">
