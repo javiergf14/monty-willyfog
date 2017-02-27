@@ -181,6 +181,8 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
         
         # Check if the row does exist.
         msg = 'SELECT * FROM {} WHERE {}'.format(table_name, condition)
+
+        resp = ""
         try:
             cursor.execute(msg)
             resp = cursor.fetchone()
