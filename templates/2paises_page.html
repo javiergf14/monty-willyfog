@@ -9,9 +9,11 @@
 <script>
 function enviarURL(){
 			var grupoPagador = '{{ grupos_pagador }}';
+			var fichero = '{{ new_file }}';
+			var modo = '{{ mode }}';
 			var pais = document.getElementById("parametroPais").value
 			
-			var url = '/Willyfog/step3?parametroGrupoPagador='+grupoPagador+'&parametroPais='+pais;
+			var url = '/Willyfog/step3?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador+'&parametroPais='+pais;
 			window.location.href=url;
 	}	
 

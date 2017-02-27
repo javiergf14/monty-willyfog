@@ -35,6 +35,8 @@ def grupo_pagador_page():
 @app.route('/Willyfog/step2', methods=['POST', 'GET'])
 def paises_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
     paises = select_all(cursor, 'Nombre', 'TBL_PAIS')
 
     return render_template('2paises_page.html', **locals())
@@ -43,6 +45,8 @@ def paises_page():
 def moneda_page():
     grupos_pagador = request.args.get('parametroGrupoPagador')
     pais = request.args.get('parametroPais')
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
     codigo_pais = select_where(cursor, 'Id', 'Nombre', pais, 'TBL_PAIS')
 
     monedas = select_monedas(cursor, codigo_pais)
@@ -53,6 +57,8 @@ def moneda_page():
 @app.route('/Willyfog/step4', methods=['POST', 'GET'])
 def pagadora_page():
     codigo_pais = request.args.get('parametroPais')
+    new_file = request.args.get('parametroFichero')
+    mode = request.args.get('parametroModo')
     grupos_pagador = request.args.get('parametroGrupoPagador')
     id_grupos_pagador = select_where(cursor, 'Id', 'Empresa', grupos_pagador, 'TBL_GRUPOPAGADOR')
     monedas = request.args.get('parametroMoneda')
@@ -62,9 +68,6 @@ def pagadora_page():
         pagadoras = select_pagadora(cursor,  id_grupos_pagador, codigo_pais, id_monedas)
     else:
         pagadoras = select_pagadora(cursor, id_grupos_pagador)
-
-    new_file = request.args.get('parametroFichero')
-    mode = request.args.get('parametroModo')
 
     return render_template('4pagadora_page.html', **locals())
 
