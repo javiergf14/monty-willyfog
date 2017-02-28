@@ -66,7 +66,9 @@ def main(new_csv, id_pagador, flag, debug, grupo_pagador=False):
         unicode_doc.append(unicode_row)    
     raw_doc = unicode_doc
     
-    # Convert raw document to template format.  
+    # Convert raw document to template format.
+    import sys
+    sys.exit(raw_doc)
     formatted_doc = montydb.transform_to_template(raw_doc, raw_header, local_format_array) 
     
     # Detect changes between database and new doc.
