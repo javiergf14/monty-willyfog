@@ -53,7 +53,8 @@ def transform_to_template(raw_doc, raw_header, format_array):
     formatted_doc.append(raw_header)
     for cont, raw_row in enumerate(raw_doc):
         if cont < offset: continue
-        if raw_row == [';']*len(raw_header): continue ## blank line
+        if raw_row == [';']*len(raw_header): continue  # blank line
+        print(raw_row)
         row = ['']*len(raw_header)
         for key, value in format_array.items():
             row[raw_header.index(key)] = str(raw_row[value-1])       
@@ -214,11 +215,9 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
             msg = "INSERT INTO {} ({}, DateStamp, CheckCuenta, tipoPagoAgente, Id_Pagador) VALUES ({}, GETDATE(), " \
                   "'com.bjs.util.checkAccountGeneral', '9', {})".format(table_name, ','.join(db_header), ','.join(row),
                                                                         id_pagador)
-            try:
-                cursor.execute(msg)
-            except Exception as e:
-                print(msg)
-                print(e)
+
+            cursor.execute(msg)
+
      
 
 def update_rows(rows, table_name, cursor):
