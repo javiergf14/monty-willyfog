@@ -52,7 +52,8 @@ def transform_to_template(raw_doc, raw_header, format_array):
     formatted_doc = []
     formatted_doc.append(raw_header)
     for cont, raw_row in enumerate(raw_doc):
-        if cont < offset: continue 
+        if cont < offset: continue
+        if raw_row == [';']*len(raw_header): continue ## blank line
         row = ['']*len(raw_header)
         for key, value in format_array.items():
             row[raw_header.index(key)] = str(raw_row[value-1])       
