@@ -173,7 +173,7 @@ def results_page2():
     for id in pagadoras_in_file_ids:
         if id not in list(id_filtered_pagadoras):
             pagadoras_selected.append(id)
-            insert, remove, update = main('data/processed/' + new_file, id, mode, 0, id_grupos_pagador)
+            insert, remove, update = main('data/processed/' + new_file, id, mode, 0, id_grupos_pagador, paises)
 
     return render_template('7bresults_page.html', **locals())
 
