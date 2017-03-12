@@ -84,6 +84,11 @@ def main(new_csv, id_pagador, flag, debug, grupo_pagador=False):
     montydb.insert_rows(insert, table_name, cursor, raw_header, db_header, local_format_array, int(id_pagador))
     to_update = montydb.update_rows(update, table_name, cursor)
     # Commit changes.
+
+    print(insert)
+    print(remove)
+    print(update)
+
     conn.commit()
    
     if debug:
