@@ -172,7 +172,7 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
     """
 
     if "TipoPago" not in format_array:
-        raw_header = raw_header.pop("TipoPago")
+        raw_header.pop("TipoPago", None)
     for elem in rows:
         # Constructing a row with the database format in order to check if the row does already exist.
         condition = ''
