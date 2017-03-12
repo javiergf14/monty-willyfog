@@ -85,11 +85,14 @@ def main(new_csv, id_pagador, flag, debug, grupo_pagador=False):
     to_update = montydb.update_rows(update, table_name, cursor)
     # Commit changes.
 
-    print(insert)
-    print(remove)
-    print(update)
 
-    conn.commit()
+
+    try:
+        conn.commit()
+    except:
+        print(insert)
+        print(remove)
+        print(update)
    
     if debug:
         print(insert)
