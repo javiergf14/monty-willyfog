@@ -90,9 +90,7 @@ def main(new_csv, id_pagador, flag, debug, grupo_pagador=False):
     try:
         conn.commit()
     except:
-        print(insert)
-        print(remove)
-        print(update)
+        pass
    
     if debug:
         print(insert)

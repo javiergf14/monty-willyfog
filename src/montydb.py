@@ -190,6 +190,7 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
             resp = cursor.fetchone()
         except Exception as e:
             print(msg)
+            print(elem)
             print(e)
 
         if resp: # If the row exists, activate it.      
