@@ -117,7 +117,7 @@ def filter_pagadoras_page():
         format_json = f.read()
     format_array = json.loads(format_json)
 
-    pagadoras_in_file_ids =  list(format_array['Pagadoras'].keys())
+    pagadoras_in_file_ids =  list(format_array['Pagadoras'][paises].keys())
     pagadoras_in_file_ids = [int(id) for id in pagadoras_in_file_ids]
 
     pagadoras_filter_names = []
