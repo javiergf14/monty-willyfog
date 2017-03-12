@@ -15,8 +15,9 @@ function enviarURL(){
         var fichero = '{{ new_file }}';
         var modo = '{{ mode }}';
         var grupoPagador = '{{ id_grupos_pagador}}';
+        var paises = '{{ paises }}';
 
-        var url = '/Willyfog/step7b?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador
+        var url = '/Willyfog/step7b?parametroFichero='+fichero+'&parametroModo='+modo+'&parametroGrupoPagador='+grupoPagador+'&paises='+paises
         +'&parametroPagadoras='+selectedPagadoras;
         window.location.href=url;
 

@@ -155,6 +155,7 @@ def results_page2():
     new_file = request.args.get('parametroFichero')
     mode = request.args.get('parametroModo')
     id_grupos_pagador = request.args.get('parametroGrupoPagador')
+    paises = request.args.get('parametroPaises')
 
     id_filtered_pagadoras = request.args.get('parametroPagadoras').split(",")
     id_filtered_pagadoras = [int(id) for id in id_filtered_pagadoras]
@@ -163,7 +164,7 @@ def results_page2():
         format_json = f.read()
     format_array = json.loads(format_json)
 
-    pagadoras_in_file_ids =  list(format_array['Pagadoras'].keys())
+    pagadoras_in_file_ids =  list(format_array['Pagadoras'][paises].keys())
     pagadoras_in_file_ids = [int(id) for id in pagadoras_in_file_ids]
 
     pagadoras_selected = []
