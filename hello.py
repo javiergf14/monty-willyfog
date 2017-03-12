@@ -159,7 +159,7 @@ def results_page2():
 
 
     id_filtered_pagadoras = request.args.get('parametroPagadoras')
-    if id_filtered_pagadoras:
+    if id_filtered_pagadoras != '':
         id_filtered_pagadoras = [int(id) for id in id_filtered_pagadoras.split(',')]
 
     with open("data/formats/grupos_pagador/format_" + str(id_grupos_pagador) + ".txt", "r") as f:
