@@ -218,8 +218,10 @@ def insert_rows(rows, table_name,  cursor, raw_header, db_header, format_array, 
             msg = "INSERT INTO {} ({}, DateStamp, CheckCuenta, tipoPagoAgente, Id_Pagador) VALUES ({}, GETDATE(), " \
                   "'com.bjs.util.checkAccountGeneral', '9', {})".format(table_name, ','.join(db_header), ','.join(row),
                                                                         id_pagador)
-
-            cursor.execute(msg)
+            try:
+                cursor.execute(msg)
+            except:
+                print(msg)
 
      
 
